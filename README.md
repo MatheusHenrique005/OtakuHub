@@ -3,8 +3,6 @@
 <h2>Descrição</h2>
 OtakuHub é uma comunidade online para fãs de animes e mangás se conectarem e compartilharem sua paixão. Os usuários podem discutir títulos populares, descobrir novas séries e postar conteúdo divertido relacionado ao universo dos animes e mangás.
 
-Este projeto foi desenvolvido como um projeto individual para a disciplina de Projeto e Inovação na Faculdade SPTech.
-
 <h2>Funcionalidades</h2>
 Registro e login de usuários
 Feed de posts com as publicações dos usuários
@@ -31,4 +29,6 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para m
 <h2>Autor</h2>
 Matheus Henrique, aluno da SPTech
 Ou, online...
-TheusBr05
+TheusBr05<br>
+
+Este projeto foi desenvolvido como um projeto individual para a disciplina de Projeto e Inovação na Faculdade SPTech.
