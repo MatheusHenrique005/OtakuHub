@@ -1,32 +1,32 @@
-body{
+body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 
 /* HEADER */
-.header{
+.header {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    
+
     font-family: 'Comic Sans MS', Verdana, 'cursive';
     color: antiquewhite;
     background-color: #0A0A0A;
 }
 
-.header .navegacao{ 
+.header .navegacao {
     display: flex;
     flex-direction: row;
     list-style: none;
 }
 
-.header .navegacao li{
+.header .navegacao li {
     padding-left: 3vw;
 }
 
 /* FOOTER */
-.footer{
+.footer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -34,3 +34,5 @@ body{
     color: antiquewhite;
     background-color: #0A0A0A;
 }
+
+/* CONTEÚDO */
