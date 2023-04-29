@@ -6,14 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
-    <link rel="shortcut" href="IMG/logo.png">
+    <link rel="shortcut icon" href="IMG/logo_branca.png">
     <title>Home | OtakuHub</title>
 </head>
 
 <body>
     <header class="header">
         <div class="logoTipo">
-            <img class="logo" src="IMG/logo2_semFundo.png" alt="">
             OtakuHub
         </div>
 
@@ -27,31 +26,35 @@
     <div class="conteudoPagina">
         <div class="carrossel">
             <div class="slides_carrossel">
-                
+
+                <input type="radio" name="btn_radio" id="radio1">
+                <input type="radio" name="btn_radio" id="radio2">
+
                 <div class="item_slide_carrossel primeiro">
                     1
                     <img class="imgCarrosssel" src="" alt="">
                 </div>
-                <div class="item_slide_carrosel">
+                <div class="item_slide_carrossel">
                     2
                     <img class="imgCarrosssel" src="" alt="">
                 </div>
 
-                <input type="radio" class="btn_radio" id="radio1">
-                <input type="radio" class="btn_radio" id="radio2">
+            </div>
 
-                <div class="navegacao_auto">
-                    <div class="btn_auto1"></div>
-                    <div class="btn_auto2"></div>
-                </div>
 
-                <div class="navegacao_manual">
-                    <label class="btn_manual" for="radio1"></label>
-                    <label class="btn_manual" for="radio2"></label>
-                </div>
+            <!-- navegação automática q n deu certo -->
+            <!-- <div class="navegacao_auto">
+                <div class="btn_auto1"></div>
+                <div class="btn_auto2"></div>
+            </div> -->
+
+            <div class="navegacao_manual">
+                <label class="btn_manual" id="manual1" for="radio1"></label>
+                <label class="btn_manual" id="manual2" for="radio2"></label>
             </div>
 
         </div>
+
     </div>
     <footer class="footer">
         <ul>
