@@ -12,10 +12,14 @@ body {
 .header {
     display: flex;
     justify-content: right;
+    align-items: center ;
+    position: fixed;
     background-color: #0A0A0A;
     color: transparent;
+    width: 100%;
+    height: 9vh;
     transition: 1s;
-    padding: 1vh 1vw;
+    padding: 0vh 1vw;
     background-image: url(../IMG/logo2_semFundo_branca.png);
     background-repeat: no-repeat;
     background-position: center;
@@ -31,22 +35,11 @@ body {
     color: white;
 }
 
-.logoTipo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.logo {
-    width: 30px;
-    margin-right: 1vw;
-}
-
 .navegacao {
     display: flex;
     flex-direction: row;
+    align-items: center;
     list-style: none;
-    margin-right: 5vw;
 }
 
 .navegacao li{
@@ -55,4 +48,48 @@ body {
 
 .navegacao li:not(:last-child) {
     margin-right: 3vw;
+}
+
+.perfil{
+    opacity: 0;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 100%;
+    background-color: #303030;
+    margin-left: 1vw;
+    margin-right: 2vw;
+    transition: 1s;
+}
+
+.header:hover .perfil{
+    transition: 1s;
+    opacity: 1;
+}
+
+.perfil img{
+    width: 100%;
+    height: 100%;
+}
+
+/* CONTEÚDO */
+
+.conteudoPagina {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    background-color: #101010;
+    padding-top: 9vh;
+}
+
+/* FOOTER */
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-family: 'Comic Sans MS', Verdana, 'cursive';
+    color: white;
+    background-color: #0A0A0A;
+    
 }

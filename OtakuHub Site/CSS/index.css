@@ -1,26 +1,19 @@
-/* CONTEÚDO */
 
-.conteudoPagina {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #101010;
-    padding: 5vh 0vw;
-}
 
 /* carrosel/slider */
 .carrossel {
-    margin: 0 auto;
-    width: 80%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     height: auto;
-    border-radius: 20px;
     overflow: hidden;
 }
 
 .slides_carrossel {
     display: flex;
+    flex-direction: row;
     width: 200%;
-    height: 20vh;
+    height: 40vh;
 }
 
 .slides_carrossel input {
@@ -33,8 +26,8 @@
     align-items: center;
     position: relative;
     width: 50%;
+    height: 100%;
     background-color: #303030;
-    border-radius: 20px;
 }
 
 /* .item_slide_carrossel img{
@@ -103,13 +96,14 @@
 
 
 /* ANIMES */
-.sessao{
+.sessao {
     display: flex;
     flex-direction: column;
     width: 80%;
+    margin-bottom: 5vh;
 }
 
-.conteudo{
+.conteudo {
     margin-top: 5vh;
     display: flex;
     flex-direction: row;
@@ -118,7 +112,7 @@
     align-items: center;
 }
 
-.conteudo2{
+.conteudo2 {
     margin-top: 5vh;
     display: flex;
     flex-direction: row-reverse;
@@ -129,15 +123,15 @@
 
 
 
-.texto{
+.texto {
     display: flex;
     flex-direction: column;
     color: #D9D9D9;
     width: 40vw;
-    line-height: 25 px;
+    line-height: 25px;
 }
 
-.card{
+.card {
     display: flex;
     width: 25vw;
     height: 25vh;
