@@ -5,6 +5,7 @@ body {
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #101010;
 }
 
 
@@ -12,11 +13,11 @@ body {
 .header {
     display: flex;
     justify-content: right;
-    align-items: center ;
+    align-items: center;
     position: fixed;
     background-color: #0A0A0A;
     color: transparent;
-    width: 100%;
+    width:  98vw;
     height: 9vh;
     transition: 1s;
     padding: 0vh 1vw;
@@ -63,7 +64,7 @@ body {
 }
 
 .header:hover .perfil{
-    transition: 1s;
+    transition: .5s;
     opacity: 1;
 }
 
@@ -72,22 +73,11 @@ body {
     height: 100%;
 }
 
-/* CONTEÚDO */
-
-.conteudoPagina {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-self: center;
-    background-color: #101010;
-    padding-top: 9vh;
-}
-
 /* FOOTER */
 .footer {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     font-family: 'Comic Sans MS', Verdana, 'cursive';
     color: white;
     background-color: #0A0A0A;

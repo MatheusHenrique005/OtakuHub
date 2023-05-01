@@ -1,3 +1,55 @@
+.conteudoPagina {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content : space-around;
+    background-color: #101010;
+    padding-top: 3vh;
+}
+
+h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 11vh;
+    margin-bottom: 0;
+    color: white;
+    width: 100%;
+    height: 5vh;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15vw;
+    height: 70vh;
+    background-color: #303030;
+    color: white;
+    border-radius: 10px;
+}
+
+.seguindo{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 80%;
+}
+
+.seguindo h4, h3{
+    margin-bottom: 0;
+    font-family: 'Comic Sans MS', Verdana, 'cursive';
+}
+
+.lista_card{
+    display: flex;
+    flex-direction: column;
+}
+
+.lista_card span{
+    margin-left: 15px;
+}
+
 .feed{
     display: flex;
     flex-direction: column;
@@ -14,6 +66,7 @@
     justify-content: center;
     width: 100%;
     margin-bottom: 5vh;
+    border-radius: 10px;
 }
 
 .barra_superior{
