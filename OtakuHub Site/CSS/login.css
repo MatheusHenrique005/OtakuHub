@@ -1,0 +1,49 @@
+.conteudo_pagina{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    margin-top: 10vh;
+}
+
+.card_login{
+    display: flex;
+    flex-direction: column;
+    background-color: #303030;
+    padding: 3vh 3vw;
+    border-radius: 20px;
+    margin-bottom: 3vh;
+    border: 1px solid  #0A0A0A;
+}
+
+.card_login h2{
+    margin-top: 0;
+}
+
+.campos{
+    display: flex;
+    flex-direction: column;
+}
+
+.campos input{
+    margin-bottom: 2vh;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+
+.botoes{
+
+}
+
+.botoes button{
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    font-size: 20px ;
+    background-color: #303030;
+    border: 1px solid  #0A0A0A;
+}
+
+.botoes button:not(:last-child){
+    margin-right: 3vw;
+}
