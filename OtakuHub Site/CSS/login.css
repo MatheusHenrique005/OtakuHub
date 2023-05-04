@@ -15,21 +15,38 @@
     border-radius: 20px;
     margin-bottom: 3vh;
     border: 1px solid  #0A0A0A;
+    color: white;
 }
 
 .card_login h2{
     margin-top: 0;
+    margin-bottom: 5vh;
 }
 
 .campos{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .campos input{
-    margin-bottom: 2vh;
+    margin-bottom: 5vh;
+    border: none;
+    background-color: #303030;
+    border-bottom: 1px solid #0A0A0A;
     border-radius: 5px;
     padding: 3px 5px;
+}
+
+.campos input::selection, input:focus{
+    display: flex;
+    border: none;
+}
+
+.rodape_login{
+
 }
 
 .botoes{
@@ -42,6 +59,7 @@
     font-size: 20px ;
     background-color: #303030;
     border: 1px solid  #0A0A0A;
+    color: white;
 }
 
 .botoes button:not(:last-child){
