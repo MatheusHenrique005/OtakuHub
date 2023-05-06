@@ -27,12 +27,22 @@
 
 .item_slide_carrossel {
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
-    position: relative;
     width: 50%;
     height: 100%;
     background-color: #303030;
+}
+
+.item_slide_carrossel img{
+    display: flex;
+    height: 100%;
+}
+
+.texto_carrossel{
+    display: flex;
+    flex-direction: column;
+    color: white;
 }
 
 .margin_top{

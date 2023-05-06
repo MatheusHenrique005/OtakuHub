@@ -1,13 +1,23 @@
 create database OtakuHub;
 use OtakuHub;
 
-create table anime_manga(
+create table anime(
 	id_anime int primary key auto_increment,
-    tipo char(5),
-    constraint chkTipo check (tipo in('anime', 'manga')),
     titulo varchar(50),
+    sinopse varchar(2000),
     qdt_capitulos int,
-    sinopse varchar(2000)
+    lancamento date,
+	estudio varchar(45)    
+);
+
+create table manga(
+	id_manga int primary key auto_increment,
+    titulo varchar(50),
+    sinopse varchar(2000),
+    qtd_capitulos int,
+    lancamento date,
+    autor varchar(45),
+    editora varchar(45)
 );
 
 create table usuario(

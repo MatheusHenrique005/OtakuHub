@@ -47,6 +47,11 @@ body {
     cursor: pointer;
 }
 
+.navegacao li:hover{
+    text-decoration: underline;
+
+}
+
 .navegacao li:not(:last-child) {
     margin-right: 3vw;
 }
