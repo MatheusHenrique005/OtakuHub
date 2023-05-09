@@ -7,14 +7,28 @@
     margin-top: 10vh;
 }
 
+.header{
+    background-position: 10%;
+    transition: .5s;
+    background-size: 10vh;
+    color: white;
+}
+
+.perfil{
+    transition: .5s;
+    opacity: 1;
+}
+
 .card_login{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     background-color: #303030;
     padding: 3vh 3vw;
     border-radius: 20px;
     margin-bottom: 3vh;
-    border: 1px solid  #0A0A0A;
+    border: 2px solid  #0A0A0A;
     color: white;
 }
 
@@ -26,31 +40,17 @@
 .campos{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     width: 100%;
 }
 
 .campos input{
     margin-bottom: 5vh;
-    border: none;
     background-color: #303030;
-    border-bottom: 1px solid #0A0A0A;
     border-radius: 5px;
-    padding: 3px 5px;
-}
-
-.campos input::selection, input:focus{
-    display: flex;
-    border: none;
-}
-
-.rodape_login{
-
-}
-
-.botoes{
-
+    padding: 2vh 2vw;
+    color: white;
 }
 
 .botoes button{
