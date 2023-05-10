@@ -53,6 +53,10 @@
     color: white;
 }
 
+.campos input:focus{
+    outline: 0;
+}
+
 .botoes button{
     padding: 1vh 1vw;
     border-radius: 7px;

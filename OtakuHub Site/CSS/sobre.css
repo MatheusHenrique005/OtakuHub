@@ -28,16 +28,17 @@
 
 .item_slide_carrossel {
     display: flex;
-    justify-content: right;
+    justify-content: left;
     align-items: center;
     width: 50%;
-    height: 100%;
     background-color: #303030;
+    padding: 3vh 3vw;
 }
 
 .item_slide_carrossel img{
     display: flex;
     height: 100%;
+    opacity: .5;
 }
 
 .texto_carrossel{
