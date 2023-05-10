@@ -61,7 +61,3 @@
     border: 1px solid  #0A0A0A;
     color: white;
 }
-
-.botoes button:not(:last-child){
-    margin-right: 3vw;
-}

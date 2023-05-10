@@ -1,0 +1,80 @@
+.header{
+    background-position: 10%;
+    transition: .5s;
+    background-size: 10vh;
+    color: white;
+}
+
+.margin_top{
+    display: flex;
+    height: 10vh;
+}
+
+.perfil{
+    opacity: 0;
+}
+
+.header:hover .perfil{
+    opacity: 0;
+}
+
+.conteudo_pagina{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    height: 85vh;
+}
+
+.logo_tela{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+}
+
+.logo_tela img{
+    width: 40%;
+}
+
+.card_login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #303030;
+    width: 50%;
+    border-radius: 20px 0 0 20px;
+}
+
+.card_login h1{
+    display: flex;
+    margin-bottom: 5vh;
+    color: white;
+}
+
+.campos{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.campos input{
+    display: flex;
+    margin-bottom: 3vh;
+    font-size: 17px;
+    background-color: #303030;
+    border-radius: 5px;
+    padding: 2vh 2vw;
+    color: white;
+}
+
+.botoes button{
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    font-size: 20px ;
+    background-color: #101010;
+    border: none;
+    color: white;
+}
