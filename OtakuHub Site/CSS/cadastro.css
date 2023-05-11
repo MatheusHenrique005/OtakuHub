@@ -11,11 +11,11 @@
 }
 
 .perfil{
-    opacity: 0;
+    opacity: 1;
 }
 
-.header:hover .perfil{
-    opacity: 0;
+.header li a{
+    color: white;
 }
 
 .conteudo_pagina{

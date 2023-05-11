@@ -19,9 +19,9 @@ body {
     color: transparent;
     width:  98vw;
     height: 10vh;
-    transition: 1s;
+    transition: .5s;
     padding: 0vh 1vw;
-    background-image: url(../IMG/logo2_semFundo_branca.png);
+    background-image: url(../IMG/logos/logo2_semFundo_branca.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 15vh;
@@ -43,13 +43,21 @@ body {
     list-style: none;
 }
 
-.navegacao li{
+.navegacao li a{
     cursor: pointer;
+    text-decoration: none;
+    color: #0A0A0A;
+    transition: .5s;
 }
 
-.navegacao li:hover{
+.navegacao li a:hover{
     text-decoration: underline;
+    
+}
 
+.header:hover li a{
+    color: white;
+    transition: .5s;
 }
 
 .navegacao li:not(:last-child) {
@@ -66,7 +74,7 @@ body {
     background-color: #303030;
     margin-left: 1vw;
     margin-right: 2vw;
-    transition: 1s;
+    transition: .5s;
 }
 
 .header:hover .perfil{

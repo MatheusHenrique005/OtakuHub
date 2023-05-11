@@ -132,6 +132,10 @@
     align-items: center;
 }
 
+.conteudo:not(:last-child){
+    margin-bottom: 2vh;
+}
+
 .texto {
     display: flex;
     flex-direction: column;
