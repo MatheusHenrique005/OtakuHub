@@ -158,8 +158,9 @@
 
 .sessao2{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 85vh;
+    align-items: center;
     background-color: #303030;
     padding: 10vh 10vw;
 }
@@ -168,6 +169,16 @@
     color: #D9D9D9;
     height: max-content;
     line-height: 25px;
+}
+
+.logo_sessao2{
+    display: flex;
+    justify-content: center;
+    color: #101010;
+}
+
+.logo_sessao2 img{
+    width: 100%;
 }
 
 /* FOOTER */

@@ -15,7 +15,8 @@ body {
     justify-content: right;
     align-items: center;
     position: fixed;
-    background-color: #0A0A0A;
+    background-color: #0a0a0ae1;
+    backdrop-filter: blur(3px);
     color: transparent;
     width:  98vw;
     height: 10vh;
@@ -48,6 +49,7 @@ body {
     text-decoration: none;
     color: #0A0A0A;
     transition: .5s;
+    opacity: 0;
 }
 
 .navegacao li a:hover{
@@ -58,6 +60,7 @@ body {
 .header:hover li a{
     color: white;
     transition: .5s;
+    opacity: 1;
 }
 
 .navegacao li:not(:last-child) {
