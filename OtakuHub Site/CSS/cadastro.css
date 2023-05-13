@@ -1,31 +1,33 @@
-.header{
+.header {
     background-position: 10%;
     transition: .5s;
     background-size: 10vh;
     color: white;
 }
 
-.margin_top{
+.margin_top {
     display: flex;
     height: 10vh;
 }
 
-.perfil{
+.perfil {
     opacity: 1;
 }
 
-.header li a{
+.header li a {
     color: white;
+    transition: .5s;
+    opacity: 1;
 }
 
-.conteudo_pagina{
+.conteudo_pagina {
     display: flex;
     flex-direction: row;
     justify-content: right;
     height: 85vh;
 }
 
-.logo_tela{
+.logo_tela {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,11 +36,23 @@
     width: 50%;
 }
 
-.logo_tela img{
+.logo_tela img {
     width: 40%;
 }
 
-.card_login{
+.card_erro {
+    display: none;
+    background-color: #fff;
+    color: black;
+    width: 230px;
+    position: fixed;
+    border-radius: 4px;
+    border: #e6005a 3px solid;
+    padding: 10px;
+    margin-right: 10%;
+}
+
+.card_login {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -48,19 +62,19 @@
     border-radius: 20px 0 0 20px;
 }
 
-.card_login h1{
+.card_login h1 {
     display: flex;
     margin-bottom: 5vh;
     color: white;
 }
 
-.campos{
+.campos {
     display: flex;
     flex-direction: column;
     width: 70%;
 }
 
-.campos input{
+.campos input {
     display: flex;
     margin-bottom: 3vh;
     font-size: 17px;
@@ -70,23 +84,37 @@
     color: white;
 }
 
-.campos input:focus{
+.campos input:focus {
     outline: 0;
 }
 
-.botoes button{
+.botoes{
+    margin-bottom: 60px;
+}
+
+.botoes button {
     padding: 1vh 1vw;
     border-radius: 7px;
-    font-size: 20px ;
+    font-size: 20px;
     background-color: #101010;
     border: none;
     color: white;
 }
 
-.entre_aqui{
+.loading-div {
+    display: none;
+    margin: 10px;
+    width: 40px;
+}
+
+.loading-div img{
+    width: 100%;
+}
+
+.entre_aqui {
     color: white;
 }
 
-.entre_aqui a{
+.entre_aqui a {
     color: white;
 }

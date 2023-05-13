@@ -16,6 +16,8 @@
 
 .header li a{
     color: white;
+    transition: .5s;
+    opacity: 1;
 }
 
 .perfil{
