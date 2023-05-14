@@ -8,7 +8,7 @@ var PORTA = process.env.AMBIENTE_PROCESSO == "desenvolvimento" ? 3333 : 8080;
 
 var app = express();
 
-var feedRouter = require("./src/routes/feed");
+var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 
 
@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(cors());
 
-app.use("/", feedRouter);
+app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 
 

@@ -1,0 +1,121 @@
+.header {
+    background-position: 10%;
+    transition: .5s;
+    background-size: 10vh;
+    color: white;
+}
+
+.margin_top {
+    display: flex;
+    height: 10vh;
+}
+
+.perfil {
+    opacity: 1;
+}
+
+.header li a {
+    color: white;
+    transition: .5s;
+    opacity: 1;
+}
+
+.conteudo_pagina {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    height: 85vh;
+}
+
+.logo_tela {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+}
+
+.logo_tela img {
+    width: 40%;
+}
+
+.card_erro {
+    display: none;
+    background-color: #d9d9d9;
+    color: black;
+    width: 230px;
+    position: fixed;
+    border-radius: 4px;
+    border: #0a0a0a 3px solid;
+    padding: 10px;
+    margin-right: 2vw;
+    margin-top: 2vh;
+}
+
+.card_login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #303030;
+    width: 50%;
+    border-radius: 20px 0 0 20px;
+}
+
+.card_login h1 {
+    display: flex;
+    margin-bottom: 5vh;
+    color: white;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.campos input {
+    display: flex;
+    margin-bottom: 3vh;
+    font-size: 17px;
+    background-color: #303030;
+    border-radius: 5px;
+    padding: 2vh 2vw;
+    color: white;
+}
+
+.campos input:focus {
+    outline: 0;
+}
+
+.botoes{
+    margin-bottom: 60px;
+}
+
+.botoes button {
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    font-size: 20px;
+    background-color: #101010;
+    border: none;
+    color: white;
+}
+
+.loading-div {
+    display: none;
+    margin: 10px;
+    width: 40px;
+}
+
+.loading-div img{
+    width: 100%;
+}
+
+.entre_aqui {
+    color: white;
+}
+
+.entre_aqui a {
+    color: white;
+}
