@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="JS/funcoes.js"></script>
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/login.css">
     <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
@@ -12,12 +13,8 @@
 </head>
 
 <body>
-    <header class="header">
+    <header id="header" class="header">
         <ul class="navegacao">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="sobre.html">Saiba Mais</a></li>
-            <li><a href="animes.html">Animes</a></li>
-            <li><a href="mangas.html">Mangás</a></li>
             <li><a href="cadastro.html">Cadastro</a></li>
             <li><a href="login.html">Login</a></li>
         </ul>
@@ -27,19 +24,25 @@
         </div>
 
     </header>
+    <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+    </div>
     <div class="conteudo_pagina">
         <div class="card_login">
             <h2>Login</h2>
             <div class="campos">
                 <input placeholder="E-mail/Usuário" type="text" id="input_email">
-                <input placeholder="Senha" type="text" id="input_senha">
+                <input placeholder="Senha" type="password" id="input_senha">
+            </div>
+            <div id="div_aguardar" class="loading-div">
+                <img src="IMG/loading.gif" id="loading-gif">
             </div>
             <div class="rodape_login">
                 <p>Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
             </div>
         </div>
         <div class="botoes">
-            <button><b>Entrar</b></button>
+            <button onclick="entrar()"><b>Entrar</b></button>
         </div>
     </div>
     <footer class="footer">
@@ -50,3 +53,97 @@
 </body>
 
 </html>
+
+<script>
+
+    if (sessionStorage.length > 0){
+        header.innerHTML = `
+            <ul class="navegacao">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="sobre.html">Saiba Mais</a></li>
+                <li><a href="animes.html">Animes</a></li>
+                <li><a href="mangas.html">Mangás</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+
+            <div class="perfil">
+                <a href="perfil.html">
+                    <img src="IMG/avatar.png" alt="">
+                </a>
+            </div>
+        `;
+    }
+
+    function entrar() {
+        aguardar();
+
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Todos os seus campos estão em branco";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+ 
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NICK_USUARIO = json.nick;
+                    sessionStorage.NASCIMENTO_USUARIO = json.dtNasc;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id_usuario;
+
+                    setTimeout(function () {
+                        window.location = "index.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

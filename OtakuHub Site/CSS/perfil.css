@@ -1,0 +1,9 @@
+.margin_top{
+    display: flex;
+    height: 10vh;
+}
+
+.conteudo_pagina{
+    display: flex;
+    height: 85vh;
+}

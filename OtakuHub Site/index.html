@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/index.css">
     <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
+    <script src="JS/funcoes.js"></script>
     <title>Feed | OtakuHub</title>
 </head>
 
-<body>
+<body onload="validarSessao()">
     <header class="header">
         <ul class="navegacao">
             <li><a href="index.html">Home</a></li>
@@ -23,7 +24,9 @@
         </ul>
 
         <div class="perfil">
-            <img src="IMG/avatar.png" alt="">
+            <a href="perfil.html">
+                <img src="IMG/avatar.png" alt="">
+            </a>
         </div>
 
     </header>
@@ -136,3 +139,11 @@
 </body>
 
 </html>
+
+<script>
+
+    if(sessionStorage.length == 0){
+        window.location = "login.html";
+    }
+
+</script>
