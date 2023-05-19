@@ -1,0 +1,45 @@
+.margin_top{
+    height: 10vh;
+}
+
+.conteudo_pagina{
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    color: white;
+    align-items: center;
+}
+
+.campos_horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 30%;
+    margin: 5vh 0;
+}
+
+.campo_vertical{
+    display: flex;
+    flex-direction: column;
+}
+
+.campo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vh 0;
+}
+
+.campo input{
+    height: 15px;
+    width: 15px;
+}
+
+.botao button {
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    font-size: 20px;
+    background-color: #303030;
+    border: none;
+    color: white;
+}
