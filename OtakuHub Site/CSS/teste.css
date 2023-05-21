@@ -1,0 +1,15 @@
+.form-container {
+  width: 400px; /* Defina a largura do formulário conforme necessário */
+  margin: 0 auto; /* Centraliza o formulário horizontalmente */
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  align-self: flex-start;
+}
+
+.back-button {
+  margin: 10px 10px 0 10px; /* Ajuste as margens conforme necessário */
+}
+

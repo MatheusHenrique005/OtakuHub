@@ -58,7 +58,7 @@
 
 <script>
 
-    if (sessionStorage.length > 0){
+    if (sessionStorage.length > 0) {
         header.innerHTML = `
             <ul class="navegacao">
                 <li><a href="index.html">Home</a></li>
@@ -85,7 +85,7 @@
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "Todos os seus campos estão em branco";
+            mensagem_erro.innerHTML = "Preencha todos os campos";
             finalizarAguardar();
             return false;
         }
@@ -110,7 +110,7 @@
 
             if (resposta.ok) {
                 console.log(resposta);
- 
+
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
@@ -130,6 +130,11 @@
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
+
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Algo deu errado";
+                finalizarAguardar();
+                return false;
 
                 resposta.text().then(texto => {
                     console.error(texto);

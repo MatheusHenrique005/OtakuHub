@@ -36,10 +36,10 @@
                 <img src="IMG/avatar.png" alt="">
             </div>
             <div class="info_usuario">
-                <h3><span>TheusBr05</span></h3>
-                <p>Nome: <span>Matheus Henrique</span></p>
-                <p>Aniversário: <span>05/03</span></p>
-                <p>E-mail: <span>matheus.henrique@sptech.school</span></p>
+                <h3><span id="span_nick">aaaaa</span></h3>
+                <p>Nome: <span id="span_nome">Matheus Henrique</span></p>
+                <p>Idade: <span id="span_idade">18</span> anos</p>
+                <p>E-mail: <span id="span_email">matheus.henrique@sptech.school</span></p>
             </div>
             <div class="botao">
                 <button>Editar Perfil</button>
@@ -86,3 +86,9 @@
     </footer>
 </body>
 </html>
+<script>
+    span_nick.innerHTML = sessionStorage.NICK_USUARIO;
+    span_nome.innerHTML = sessionStorage.NOME_USUARIO;
+    span_aniversario.innerHTML = sessionStorage.NASCIMENTO_USUARIO;
+    span_email.innerHTML = sessionStorage.EMAIL_USUARIO;
+</script>

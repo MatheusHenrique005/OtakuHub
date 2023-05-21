@@ -5,9 +5,23 @@
 .conteudo_pagina{
     display: flex;
     flex-direction: column;
-    height: 85vh;
+    height: 80vh;
     color: white;
     align-items: center;
+    padding-top: 5vh;
+}
+
+.card_erro {
+    display: none;
+    background-color: #d9d9d9;
+    color: black;
+    width: 230px;
+    position: fixed;
+    border-radius: 4px;
+    border: #0a0a0a 3px solid;
+    padding: 10px;
+    margin-left: 2vw;
+    margin-top: 12vh;
 }
 
 .campos_horizontal{
@@ -25,7 +39,6 @@
 
 .campo{
     display: flex;
-    justify-content: center;
     align-items: center;
     margin: 1vh 0;
 }
@@ -33,6 +46,11 @@
 .campo input{
     height: 15px;
     width: 15px;
+    cursor: pointer;
+}
+
+.campo label{
+    cursor: pointer;
 }
 
 .botao button {
@@ -42,4 +60,15 @@
     background-color: #303030;
     border: none;
     color: white;
+    cursor: pointer;
 }
+
+.loading-div {
+    width: 50px;
+    display: none;
+  }
+  
+  .loading-div img {
+    height: 50px;
+    width: 50px;
+  }
