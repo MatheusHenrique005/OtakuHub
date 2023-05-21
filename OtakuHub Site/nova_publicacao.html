@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/nova_publicacao.css">
+    <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
+    <script src="JS/funcoes.js"></script>
+    <title>Nova Publicação | OtakuHub</title>
+</head>
+
+<body>
+    <header class="header">
+        <ul class="navegacao">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="sobre.html">Saiba Mais</a></li>
+            <li><a href="animes.html">Animes</a></li>
+            <li><a href="votacao.html">Vote</a></li>
+            <li><a href="cadastro.html">Cadastro</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+
+        <div class="perfil">
+            <a href="perfil.html">
+                <img src="IMG/avatar.png" alt="">
+            </a>
+        </div>
+
+    </header>
+    <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+    </div>
+    <div onclick="window.history.back()" class="botao_voltar">
+        <img src="IMG/001-left-arrow.png" alt="">
+    </div>
+    <div class="margin_top"></div>
+
+    <div class="conteudo_pagina">
+
+        <div class="nova_publicacao">
+            <h2>Nova Publicação</h2>
+            <textarea id="texto" placeholder="Digite seu texto"></textarea>
+            <input type="file" id="input_imagem">
+            <button onclick="publicar()">Publicar</button>
+        </div>
+
+    </div>
+    <footer class="footer">
+        <p>©OtakuHub 2023 - Todos os direitos reservados</p>
+    </footer>
+</body>
+
+</html>

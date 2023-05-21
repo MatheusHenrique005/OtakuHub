@@ -1,4 +1,4 @@
-.conteudo_pagina{
+.conteudo_pagina {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -7,20 +7,20 @@
     margin-top: 10vh;
 }
 
-.header{
+.header {
     background-position: 10%;
     transition: .5s;
     background-size: 10vh;
     color: white;
 }
 
-.header li a{
+.header li a {
     color: white;
     transition: .5s;
     opacity: 1;
 }
 
-.perfil{
+.perfil {
     transition: .5s;
     opacity: 1;
 }
@@ -38,7 +38,7 @@
     margin-top: 12vh;
 }
 
-.card_login{
+.card_login {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,16 +47,16 @@
     padding: 3vh 3vw;
     border-radius: 20px;
     margin-bottom: 3vh;
-    border: 2px solid  #0A0A0A;
+    border: 2px solid #0A0A0A;
     color: white;
 }
 
-.card_login h2{
+.card_login h2 {
     margin-top: 0;
     margin-bottom: 5vh;
 }
 
-.campos{
+.campos {
     display: flex;
     flex-direction: column;
     justify-content: right;
@@ -64,7 +64,7 @@
     width: 100%;
 }
 
-.campos input{
+.campos input {
     margin-bottom: 5vh;
     background-color: #303030;
     border-radius: 5px;
@@ -72,29 +72,29 @@
     color: white;
 }
 
-.campos input:focus{
+.campos input:focus {
     outline: 0;
 }
 
 .loading-div {
     width: 50px;
     display: none;
-  }
-  
-  .loading-div img {
+}
+
+.loading-div img {
     height: 50px;
     width: 50px;
-  }
+}
 
-.botoes button{
+.botoes button {
     padding: 1vh 1vw;
     border-radius: 7px;
-    font-size: 20px ;
+    font-size: 20px;
     background-color: #303030;
-    border: 1px solid  #0A0A0A;
+    border: 1px solid #0A0A0A;
     color: white;
 }
 
-.rodape_login a{
- color: white;
+.rodape_login a {
+    color: white;
 }
