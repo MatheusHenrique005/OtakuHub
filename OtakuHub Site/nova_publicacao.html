@@ -42,8 +42,12 @@
 
         <div class="nova_publicacao">
             <h2>Nova Publicação</h2>
-            <textarea id="texto" placeholder="Digite seu texto"></textarea>
-            <input type="file" id="input_imagem">
+            <div class="titulo">
+                <h3 for="titulo">Título: </h3>
+                <input name="titulo" type="text" id="input_titulo">
+            </div>
+            <textarea id="textarea_conteudo" placeholder="Digite seu texto"></textarea>
+            <input type="text" id="input_imagem">
             <button onclick="publicar()">Publicar</button>
         </div>
 
@@ -54,3 +58,36 @@
 </body>
 
 </html>
+<script>
+
+    function publicar(){
+
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var titulo = input_titulo.value;
+        var conteudo = textarea_conteudo.value;
+        var imagem = input_imagem.value;
+
+        fetch("/posts/publicar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({
+                tituloServer: titulo,
+                conteudoServer: conteudo,
+                imagemServer: imagem,
+                idUsuarioServer: idUsuario
+            })
+        })
+
+        
+
+        setTimeout(()=> {
+            cardErro.style.display = "none";
+            setTimeout(()=>{
+                window.location = "index.html";
+            }, 500);
+        }, 2000);
+    }
+
+</script>
