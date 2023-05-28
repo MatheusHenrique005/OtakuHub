@@ -30,18 +30,35 @@
     border-radius: 10px;
 }
 
+.titulo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.titulo input{
+    padding: 5px;
+    font-size: medium;
+    width: 70%;
+}
+
+.titulo h3{
+    margin: 0;
+}
+
 .nova_publicacao textarea {
-    width: 100%;
+    width: 80%;
     height: 250px;
     margin-bottom: 10px;
     resize: vertical;
-    max-width: 100%;
+    max-width: 80%;
     font-size: large;
 }
 
-.nova_publicacao input{
-    margin-bottom: 10px;
-}
+
 
 .nova_publicacao button {
     padding: 10px 20px;
@@ -49,6 +66,7 @@
     background-color: #0A0A0A;
     color: #D9D9D9;
     border: none;
+    margin-top: 10px;
     border-radius: 5px;
     cursor: pointer;
 }
