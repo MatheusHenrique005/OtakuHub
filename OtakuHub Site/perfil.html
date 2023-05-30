@@ -12,7 +12,7 @@
     <title>Perfil | OtakuHub</title>
 </head>
 
-<body>
+<body onload="listar_publicacoes_usuario(sessionStorage.ID_USUARIO)">
     <div class="margin_top">
     </div>
     <header class="header">
@@ -38,10 +38,11 @@
                 <img src="IMG/avatar.png" alt="">
             </div>
             <div class="info_usuario">
-                <h3><span id="span_nick">aaaaa</span></h3>
+                <h3><span id="span_nick">TheusBr05</span></h3>
                 <p>Nome: <span id="span_nome">Matheus Henrique</span></p>
                 <p>Idade: <span id="span_idade">18</span> anos</p>
                 <p>E-mail: <span id="span_email">matheus.henrique@sptech.school</span></p>
+                <p>Aniversário: <span id="span_aniversario">03-05</span></p>
             </div>
             <div class="botao">
                 <button>Editar Perfil</button>
@@ -57,33 +58,38 @@
                 </a>
             </div>
             <h2>Publicações</h2>
-            <div class="postagem">
+            <div id="feed" class="feed">
+                <div class="postagem">
 
-                <div class="barra_superior">
-                    <div class="info_usuario_barra">
-                        <div class="icone_usuario">
-                            <img src="IMG/avatar.png" alt="">
+                    <div class="barra_superior">
+                        <div class="info_usuario_barra">
+                            <div class="icone_usuario">
+                                <img src="IMG/avatar.png" alt="">
+                            </div>
+                            <p>TheusBr05</p>
                         </div>
-                        <p>TheusBr05</p>
+                        <button class="btn_seguir">
+                            Seguir
+                        </button>
                     </div>
-                    <button class="btn_seguir">
-                        Seguir
-                    </button>
+                    <div class="conteudo_postagem">
+                        <div class="titulo_postagem">
+                            <h3>Saiba mais sobre Animes</h3>
+                        </div>
+                        <div class="texto_postagem">
+                            <p>Animes são uma forma popular de entretenimento em todo o mundo. Eles são animações japonesas
+                                queabrangem uma ampla variedade de gêneros, como ação, romance, comédia, ficção científica,
+                                entreoutros. Os animes muitas vezes são baseados em mangás (quadrinhos japoneses) e têm uma
+                                grande basede fãs, incluindo pessoas de todas as idades. Os animes podem ser vistos em
+                                plataformas destreaming, como a Netflix, a Crunchyroll, a Funimation e outras, bem como em
+                                canais de televisão eem DVDs</p>
+                        </div>
+                        <div class="imagem_postagem">
+                            <img src="IMG/animes/animes.png" alt="">
+                        </div>
+                    </div>
+    
                 </div>
-                <div class="conteudo_postagem">
-                    <div class="imagem_postagem">
-                        <img src="IMG/animes/animes.png" alt="">
-                    </div>
-                    <div class="texto_postagem">
-                        <p>Animes são uma forma popular de entretenimento em todo o mundo. Eles são animações japonesas
-                            queabrangem uma ampla variedade de gêneros, como ação, romance, comédia, ficção científica,
-                            entreoutros. Os animes muitas vezes são baseados em mangás (quadrinhos japoneses) e têm uma
-                            grande basede fãs, incluindo pessoas de todas as idades. Os animes podem ser vistos em
-                            plataformas destreaming, como a Netflix, a Crunchyroll, a Funimation e outras, bem como em
-                            canais de televisão eem DVDs</p>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -99,6 +105,63 @@
 <script>
     span_nick.innerHTML = sessionStorage.NICK_USUARIO;
     span_nome.innerHTML = sessionStorage.NOME_USUARIO;
-    span_aniversario.innerHTML = sessionStorage.NASCIMENTO_USUARIO;
     span_email.innerHTML = sessionStorage.EMAIL_USUARIO;
+    span_aniversario.innerHTML = sessionStorage.ANIVERSARIO_USUARIO;
+    span_idade.innerHTML = sessionStorage.IDADE_USUARIO;
+
+    function listar_publicacoes_usuario(idUsuario) {
+        fetch(`/posts/listar_publicacoes_usuario/${idUsuario}`, { cache: 'no-store' }).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    feed.innerHTML = `
+                        <div class="postagem">
+                            <div class="barra_superior">
+                                <h3>Nenhum resultado encontrado</h3>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    feed.innerHTML = "";
+                    for (var i = resposta.length - 1; i >= 0; i--) {
+                        var nick = resposta[i].nick;
+                        var titulo = resposta[i].titulo;
+                        var conteudo = resposta[i].conteudo;
+                        var imagem = resposta[i].imagem;
+                        feed.innerHTML += `
+                            <div id="postagem${i}" class="postagem">
+                                <div class="barra_superior">
+                                    <div class="info_usuario_barra">
+                                        <div class="icone_usuario">
+                                            <img id="img_avatar" src="IMG/avatar.png" alt="">
+                                        </div>
+                                        <p id="p_nick">${nick}</p>
+                                    </div>
+                                    <button class="btn_seguir">
+                                        Seguir
+                                    </button>
+                                </div>
+                                <div class="conteudo_postagem">
+                                    <div class="titulo_postagem">
+                                        <h3 id="h3_titulo">${titulo}</h3>
+                                    </div>
+                                    <div class="texto_postagem">
+                                        <p id="p_conteudo">${conteudo}</p>
+                                    </div>
+                                    <div class="imagem_postagem">
+                                        <img id="" src="IMG/animes/animes.png" alt="">
+                                        ${imagem}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                })
+
+            }
+        })
+    }
 </script>

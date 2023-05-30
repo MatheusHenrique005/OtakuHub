@@ -31,14 +31,14 @@
     justify-content: left;
     align-items: center;
     width: 50%;
-    background-color: #303030;
-    padding: 3vh 3vw;
+    background-image: url(IMG/animes/goku.jpg);
+    padding: 3vh 0;
 }
 
 .item_slide_carrossel img{
     display: flex;
-    height: 100%;
-    opacity: .5;
+    width: 100%;
+    opacity: .3;
 }
 
 .texto_carrossel{

@@ -30,11 +30,9 @@ CREATE TABLE publicacao (
     id_publicacao INT NOT NULL AUTO_INCREMENT,
     imagem VARCHAR(150),
     titulo VARCHAR(45),
-    texto VARCHAR(1500),
+    conteudo VARCHAR(1500),
     dt_publicacao DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fk_anime_manga INT,
     fk_usuario INT,
-    CONSTRAINT fk_anime_manga FOREIGN KEY (fk_anime_manga) REFERENCES anime_manga (id_anime_manga),
     CONSTRAINT fk_publicacao_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario (id_usuario),
     CONSTRAINT pk_publicacao PRIMARY KEY (id_publicacao, fk_usuario)
 );
@@ -93,8 +91,8 @@ $$
 
 call sp_votar(2, 1);
 
-INSERT INTO publicacao VALUES
-    (null, null, '${titulo}', '${conteudo}', DEFAULT, ${idUsuario});
 
-DESCRIBE publicacao;
-
+SELECT * FROM publicacao
+            JOIN usuario ON id_usuario = fk_usuario
+        WHERE id_usuario = 5
+        ORDER BY id_publicacao;

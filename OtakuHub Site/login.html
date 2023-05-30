@@ -31,7 +31,7 @@
     </div>
     <div class="conteudo_pagina">
         <div class="card_login">
-            <h2>Login</h2>
+            <h1>Login</h1>
             <div class="campos">
                 <input placeholder="E-mail/Usuário" type="text" id="input_email">
                 <input placeholder="Senha" type="password" id="input_senha">
@@ -79,6 +79,7 @@
 
     function entrar() {
         aguardar();
+        input_senha.style.marginBottom = "0px";
 
         var emailVar = input_email.value;
         var senhaVar = input_senha.value;
@@ -117,7 +118,8 @@
 
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NICK_USUARIO = json.nick;
-                    sessionStorage.NASCIMENTO_USUARIO = json.dtNasc;
+                    sessionStorage.ANIVERSARIO_USUARIO = json.aniversario;
+                    sessionStorage.IDADE_USUARIO = json.idade
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id_usuario;
 

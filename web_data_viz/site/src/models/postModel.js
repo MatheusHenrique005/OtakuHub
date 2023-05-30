@@ -17,7 +17,22 @@ function listar_publicacoes(){
 
     var instrucao = `
         SELECT * FROM publicacao
-            JOIN usuario ON id_usuario = fk_usuario;
+            JOIN usuario ON id_usuario = fk_usuario
+        ORDER BY id_publicacao;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function listar_publicacoes_usuario(idUsuario){
+    console.log("Model listar publicações, ok");
+
+    var instrucao = `
+        SELECT * FROM publicacao
+            JOIN usuario ON id_usuario = fk_usuario
+        WHERE id_usuario = ${idUsuario}
+        ORDER BY id_publicacao;
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -26,5 +41,6 @@ function listar_publicacoes(){
 
 module.exports = {
     publicar,
-    listar_publicacoes
+    listar_publicacoes,
+    listar_publicacoes_usuario
 }
