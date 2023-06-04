@@ -1,12 +1,13 @@
 var postModel = require("../models/postModel");
 
 function publicar(req, res) {
-    var titulo = req.body.tituloServer;
-    var conteudo = req.body.conteudoServer;
-    var imagem = req.body.imagemServer;
-    var idUsuario = req.body.idUsuarioServer;
 
-    postModel.publicar(idUsuario, titulo, conteudo, imagem)
+    const foto = req.file.filename;
+    var titulo = req.body.titulo;
+    var conteudo = req.body.conteudo;
+    var idUsuario = req.body.idUsuario;
+
+    postModel.publicar(idUsuario, titulo, conteudo, foto)
 }
 
 function listar_publicacoes(req, res){

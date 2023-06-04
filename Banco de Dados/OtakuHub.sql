@@ -6,6 +6,7 @@ CREATE TABLE usuario (
     nome VARCHAR(150),
     nick VARCHAR(45),
     dtNasc DATE,
+    nivel char(3) DEFAULT 'cmm',
     email VARCHAR(150),
     senha VARCHAR(45)
 );
@@ -91,8 +92,15 @@ $$
 
 call sp_votar(2, 1);
 
-
-SELECT * FROM publicacao
+SELECT id_usuario, count(id_publicacao) FROM publicacao
             JOIN usuario ON id_usuario = fk_usuario
-        WHERE id_usuario = 5
-        ORDER BY id_publicacao;
+        GROUP BY id_usuario
+        ORDER BY count(id_publicacao) DESC;
+
+SELECT * FROM anime_manga;
+
+SELECT * FROM publicacao;
+
+DESCRIBE publicacao;
+
+ALTER TABLE publicacao modify column imagem VARCHAR(5000);

@@ -1,0 +1,68 @@
+.conteudo_pagina{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    width: 100%;
+}
+
+.card_cadastro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    padding: 5vh 3vw;
+    width: 40%;
+    height: 60%;
+    background-color: #303030;
+    border-radius: 15px;
+}
+
+.card_cadastro h2{
+    color: white;
+}
+
+.campos{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin-top: 5vh;
+    position: relative;
+}
+
+.campos input{
+    display: flex;
+    font-size: 17px;
+    background-color: #303030;
+    border-radius: 5px;
+    padding: 2vh 2vw;
+    color: white;
+    width: auto;
+}
+
+
+
+.campos_horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3vh;
+}
+
+.campos_horizontal input{
+    display: flex;
+    margin-bottom: 3vh;
+    font-size: 17px;
+    background-color: #303030;
+    border-radius: 5px;
+    padding: 2vh 2vw;
+    color: white;
+    width: 32%;
+}
+
+.input_metade{
+    width: 45%;
+}

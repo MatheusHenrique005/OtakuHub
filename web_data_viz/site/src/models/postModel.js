@@ -1,11 +1,11 @@
 var database = require("../database/config")
 
-function publicar(idUsuario, titulo, conteudo, imagem) {
+function publicar(idUsuario, titulo, conteudo, foto) {
     console.log("Model publicar, ok");
 
     var instrucao = `
         INSERT INTO publicacao VALUES
-        (null, '${imagem}', '${titulo}', '${conteudo}', DEFAULT, ${idUsuario});
+        (null, '${foto}', '${titulo}', '${conteudo}', DEFAULT, ${idUsuario});
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);

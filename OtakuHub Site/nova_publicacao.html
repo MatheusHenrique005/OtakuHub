@@ -47,7 +47,7 @@
                 <input name="titulo" type="text" id="input_titulo">
             </div>
             <textarea id="textarea_conteudo" placeholder="Digite seu texto"></textarea>
-            <input type="text" id="input_imagem">
+            <input type="file" id="foto">
             <button onclick="publicar()">Publicar</button>
         </div>
 
@@ -60,34 +60,34 @@
 </html>
 <script>
 
-    function publicar(){
+    function publicar() {
+        // aguardar();
 
-        var idUsuario = sessionStorage.ID_USUARIO;
-        var titulo = input_titulo.value;
-        var conteudo = textarea_conteudo.value;
-        var imagem = input_imagem.value;
+        const formData = new FormData();
+        formData.append('foto', foto.files[0])
+        formData.append('idUsuario', sessionStorage.ID_USUARIO)
+        formData.append('titulo', input_titulo.value)
+        formData.append('conteudo', textarea_conteudo.value)
+
 
         fetch("/posts/publicar", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body:JSON.stringify({
-                tituloServer: titulo,
-                conteudoServer: conteudo,
-                imagemServer: imagem,
-                idUsuarioServer: idUsuario
-            })
+            body: formData
+        }).then(resposta => {
+            console.log(resposta);
         })
 
-        
-
-        setTimeout(()=> {
-            cardErro.style.display = "none";
-            setTimeout(()=>{
-                window.location = "index.html";
-            }, 500);
-        }, 2000);
+        // setTimeout(() => {
+        //     cardErro.style.display = "none";
+        //     // finalizarAguardar();
+        //     setTimeout(() => {
+        //         window.location = "index.html";
+        //     }, 150);
+        // }, 1000);
     }
+
+
+
+
 
 </script>
