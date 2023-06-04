@@ -66,6 +66,23 @@ body {
     margin-right: 3vw;
 }
 
+.botao_sair{
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    font-size: 20px;
+    background-color: #303030;
+    border: none;
+    color: white;
+    cursor: pointer;
+    opacity: 0;
+    transition: .5s;
+}
+
+.header:hover .botao_sair{
+    opacity: 1;
+    transition: .5s;
+}
+
 .perfil {
     display: flex;
     opacity: 0;

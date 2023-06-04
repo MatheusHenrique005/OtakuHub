@@ -19,13 +19,12 @@
             <li><a href="sobre.html">Saiba Mais</a></li>
             <li><a href="animes.html">Animes</a></li>
             <li><a href="votacao.html">Vote</a></li>
-            <li><a href="cadastro.html">Cadastro</a></li>
-            <li><a href="login.html">Login</a></li>
+            <li><button onclick="sair()" class="botao_sair">SAIR</button></li>
         </ul>
 
         <div class="perfil">
             <a href="perfil.html">
-                <img src="IMG/avatar.png" alt="">
+                <img id="img_avatar" src="IMG/avatar.png" alt="">
             </a>
         </div>
 
@@ -139,7 +138,9 @@
     if (sessionStorage.length == 0) {
         window.location = "login.html";
     }
-
+    if (sessionStorage.FOTO_USUARIO != undefined) {
+        img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
+    }
 
     function listar_publicacoes() {
         fetch("/posts/listar_publicacoes").then(function (resposta) {

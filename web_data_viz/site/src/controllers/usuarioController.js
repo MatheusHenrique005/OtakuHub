@@ -33,7 +33,7 @@ function entrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
-        
+
         usuarioModel.entrar(email, senha)
             .then(
                 function (resultado) {
@@ -80,7 +80,7 @@ function cadastrar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         usuarioModel.cadastrar(nome, nick, nascimento, email, senha)
             .then(
@@ -116,9 +116,9 @@ function votar(req, res) {
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else {
-        
+
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, nick, nascimento, email, senha)
+        usuarioModel.votar(voto)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -136,10 +136,28 @@ function votar(req, res) {
     }
 }
 
+function atualizar_perfil(req, res) {
+
+    console.log("tá osso");
+
+    const foto = req.file.filename;
+    var id_usuario = req.body.id_usuario;
+    var nick = req.body.nick;
+    var nome = req.body.nome;
+    var email = req.body.email;
+    var dtNasc = req.body.dtNasc;
+    var senha = req.body.senha;
+
+    console.log(foto);
+
+    usuarioModel.atualizar_perfil(foto, id_usuario, nick, nome, email, dtNasc, senha);
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
     testar,
-    votar
+    votar,
+    atualizar_perfil
 }

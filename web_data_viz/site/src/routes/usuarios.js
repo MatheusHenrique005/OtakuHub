@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const upload = require('../config/configUpload');
 
 var usuarioController = require("../controllers/usuarioController");
 
@@ -22,6 +23,10 @@ router.post("/cadastrar", function (req, res) {
 
 router.post("/autenticar", function (req, res) {
     usuarioController.entrar(req, res);
+});
+
+router.post("/atualizar_perfil", upload.single('foto'), function (req, res){
+    usuarioController.atualizar_perfil(req, res);
 });
 
 module.exports = router;

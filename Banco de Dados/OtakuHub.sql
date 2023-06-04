@@ -104,9 +104,9 @@ SELECT * FROM publicacao
             JOIN usuario ON id_usuario = fk_usuario
         ORDER BY id_publicacao;
 
-DESCRIBE anime_manga;
+DESCRIBE usuario;
 
-SELECT * FROM anime_manga;
+SELECT * FROM usuario;
 
 ALTER TABLE usuario ADD COLUMN foto_perfil VARCHAR(300);
 ALTER TABLE anime_manga ADD COLUMN foto_capa VARCHAR(300);

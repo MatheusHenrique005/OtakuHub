@@ -21,7 +21,7 @@
 
         <div class="perfil">
             <a href="perfil.html">
-                <img src="IMG/avatar.png" alt="">
+                <img id="img_avatar" src="IMG/avatar.png" alt="">
             </a>
         </div>
 
@@ -57,6 +57,11 @@
 </html>
 
 <script>
+
+    if (sessionStorage.FOTO_USUARIO != undefined) {
+        img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
+    }
+    
 
     if (sessionStorage.length > 0) {
         header.innerHTML = `

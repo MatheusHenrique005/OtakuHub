@@ -17,14 +17,13 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="sobre.html">Saiba Mais</a></li>
             <li><a href="animes.html">Animes</a></li>
-            <li><a href="mangas.html">Mangás</a></li>
-            <li><a href="cadastro.html">Cadastro</a></li>
-            <li><a href="login.html">Login</a></li>
+            <li><a href="votacao.html">Vote</a></li>
+            <li><button onclick="sair()" class="botao_sair">SAIR</button></li>
         </ul>
 
         <div class="perfil">
             <a href="perfil.html">
-                <img src="IMG/avatar.png" alt="">
+                <img id="img_avatar" src="IMG/avatar.png" alt="">
             </a>
         </div>
 
@@ -66,6 +65,13 @@
 
 </html>
 <script>
+    if (sessionStorage.FOTO_USUARIO != undefined) {
+        img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
+    }
+    if (sessionStorage.length == 0) {
+        window.location = "login.html";
+    }
+
     function todos_animes() {
         var sla = "ok";
         fetch("/animes/todos_animes").then(function (resposta) {
@@ -121,8 +127,8 @@
                         var genero = resposta[0].genero;
                         var foto = resposta[0].foto_capa;
                         var sinopse = resposta[0].sinopse;
-                        
-                        
+
+
                         info_animes.style.justifyContent = 'flex-start';
                         info_animes.innerHTML = `
                             <h2>${nome}</h2>

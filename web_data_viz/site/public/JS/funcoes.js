@@ -56,3 +56,8 @@ function fecharModal() {
     divModal.style.display = "none";
 }
 
+
+function sair(){
+    sessionStorage.clear();
+    window.location = "login.html"
+}

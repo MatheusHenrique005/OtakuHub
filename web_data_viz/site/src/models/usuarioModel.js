@@ -36,8 +36,25 @@ function cadastrar(nome, nick, nascimento, email, senha) {
     return database.executar(instrucao);
 }
 
+function atualizar_perfil(foto, id_usuario, nick, nome, email, dtNasc, senha){
+    var instrucao = `
+        UPDATE usuario
+        SET nome = '${nome}',
+            nick = '${nick}',
+            dtNasc = '${dtNasc}',
+            email = '${email}',
+            senha = '${senha}',
+            foto_perfil = '${foto}'
+        WHERE id_usuario = ${id_usuario};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao)
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
+    atualizar_perfil
 };

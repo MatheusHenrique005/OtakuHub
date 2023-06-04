@@ -43,6 +43,14 @@
     margin: 5vh 0vw;
 }
 
+.input_foto{
+    display: none;
+}
+
+.nova_senha{
+    display: none;
+}
+
 .info_usuario h3{
     display: flex;
     justify-content: center;
@@ -56,6 +64,7 @@
     background-color: #101010;
     border: none;
     color: white;
+    cursor: pointer;
 }
 
 .botao_nova_publicacao{
