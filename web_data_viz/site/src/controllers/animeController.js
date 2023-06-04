@@ -27,7 +27,28 @@ function todos_animes(req, res) {
     );
 }
 
+function trazer_info(req, res) {
+    
+    var id_anime = req.params.id_anime;
+
+    animeModel.trazer_info(id_anime).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+
+}
+
 module.exports = {
     cadastrar_anime,
-    todos_animes
+    todos_animes,
+    trazer_info
 }

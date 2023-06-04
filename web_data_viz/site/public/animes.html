@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
-    <link rel="stylesheet" href="CSS/animes_mangas.css">    
+    <link rel="stylesheet" href="CSS/animes_mangas.css">
     <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
     <title>Animes | OtakuHub</title>
 </head>
+
 <body onload="todos_animes()">
     <header class="header">
         <ul class="navegacao">
@@ -30,14 +32,27 @@
     <div class="margin_top">
     </div>
     <div class="conteudo_pagina">
+        <div class="margin_right">
+        </div>
 
+        <div id="info_animes" class="info_animes">
 
-        <h2>Lista de Animes e Mangás</h2>
-
-        <div id="animes_mangas" class="animes_mangas">
-            
+            <h1>Clique em um anime </h1>
+            <h1>para ver mais informações</h1>
 
         </div>
+
+        <div class="lista_animes">
+
+            <h2>Lista de Animes e Mangás</h2>
+
+            <div id="animes_mangas" class="animes_mangas">
+
+            </div>
+
+        </div>
+
+
 
 
     </div>
@@ -45,8 +60,10 @@
         <p>
             ©OtakuHub 2023 - Todos os direitos reservados
         </p>
+        <div class="margin_right"></div>
     </footer>
 </body>
+
 </html>
 <script>
     function todos_animes() {
@@ -57,7 +74,7 @@
                 if (resposta.status == 204) {
                     animes_mangas.style.justifyContent = "center";
                     animes_mangas.innerHTML = `
-                        <div class="barra_superior">
+                        <div class="sem_resultados">
                             <h3>Nenhum resultado encontrado</h3>
                         </div>
                     `;
@@ -70,9 +87,10 @@
                     for (var i = resposta.length - 1; i >= 0; i--) {
                         var nome = resposta[i].nome;
                         var foto = resposta[i].foto_capa;
-                        
+                        var id_anime = resposta[i].id_anime_manga;
+
                         animes_mangas.innerHTML += `
-                            <div class="card_anime">
+                            <div onclick="trazer_info(${id_anime})" class="card_anime">
                                 <h4>${nome}</h4>
                                 <img src="assets/${foto}" alt="">
                             </div>
@@ -81,10 +99,50 @@
                 })
             }
             console.log(sla);
-        }).catch(function(erro) {
+        }).catch(function (erro) {
             console.log(`#ERRO: ${erro}`);
         })
 
-        
     }
+
+    function trazer_info(id_anime) {
+        fetch(`/animes/trazer_info/${id_anime}`, { cache: 'no-store' })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    if (resposta.status == 204) {
+                        info_animes.style.justifyContent = 'center';
+                        info_animes.innerHTML = `
+                            <h1>Nenhum Anime Encontrado</h1>
+                        `;
+                    }
+                    resposta.json().then(function (resposta) {
+                        var nome = resposta[0].nome;
+                        var autor = resposta[0].autor;
+                        var genero = resposta[0].genero;
+                        var foto = resposta[0].foto_capa;
+                        var sinopse = resposta[0].sinopse;
+                        
+                        
+                        info_animes.style.justifyContent = 'flex-start';
+                        info_animes.innerHTML = `
+                            <h2>${nome}</h2>
+                            <div class="info_horizontal">
+                                <h4>Autor:</h4>
+                                <p> ${autor}</p>
+                            </div>
+                            <div class="info_horizontal">
+                                <h4>Gênero: </h4>
+                                <p>${genero}</p>
+                            </div>
+                            <img src="assets/${foto}" alt="">
+                            <div class="info_vertical">
+                                <h4>Sinopse</h4>
+                                <p>${sinopse}</p>
+                            </div>
+                        `;
+                    })
+                }
+            })
+    }
+
 </script>

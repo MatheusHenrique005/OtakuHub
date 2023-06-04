@@ -112,35 +112,36 @@
     span_email.innerHTML = sessionStorage.EMAIL_USUARIO;
     span_aniversario.innerHTML = sessionStorage.ANIVERSARIO_USUARIO;
     span_idade.innerHTML = sessionStorage.IDADE_USUARIO;
-    if(sessionStorage.NIVEL_USUARIO == 'adm'){
+    if (sessionStorage.NIVEL_USUARIO == 'adm') {
         navegacao.innerHTML += `
         <li><a href="cadastro_anime.html">Cadastro Animes</a></li>
         `;
     }
 
     function listar_publicacoes_usuario(idUsuario) {
-        fetch(`/posts/listar_publicacoes_usuario/${idUsuario}`, { cache: 'no-store' }).then(function (resposta) {
-            if (resposta.ok) {
-                if (resposta.status == 204) {
-                    feed.innerHTML = `
+        fetch(`/posts/listar_publicacoes_usuario/${idUsuario}`, { cache: 'no-store' })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    if (resposta.status == 204) {
+                        feed.innerHTML = `
                         <div class="postagem">
                             <div class="barra_superior">
                                 <h3>Nenhum resultado encontrado</h3>
                             </div>
                         </div>
                     `;
-                }
+                    }
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    resposta.json().then(function (resposta) {
+                        console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                    feed.innerHTML = "";
-                    for (var i = resposta.length - 1; i >= 0; i--) {
-                        var nick = resposta[i].nick;
-                        var titulo = resposta[i].titulo;
-                        var conteudo = resposta[i].conteudo;
-                        var imagem = resposta[i].imagem;
-                        feed.innerHTML += `
+                        feed.innerHTML = "";
+                        for (var i = resposta.length - 1; i >= 0; i--) {
+                            var nick = resposta[i].nick;
+                            var titulo = resposta[i].titulo;
+                            var conteudo = resposta[i].conteudo;
+                            var imagem = resposta[i].imagem;
+                            feed.innerHTML += `
                             <div id="postagem${i}" class="postagem">
                                 <div class="barra_superior">
                                     <div class="info_usuario_barra">
@@ -167,10 +168,10 @@
                                 </div>
                             </div>
                         `;
-                    }
-                })
+                        }
+                    })
 
-            }
-        })
+                }
+            })
     }
 </script>

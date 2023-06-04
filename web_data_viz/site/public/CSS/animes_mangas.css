@@ -1,8 +1,15 @@
 .conteudo_pagina {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row-reverse;
     min-height: 85vh;
+}
+
+.lista_animes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
 }
 
 h2{
@@ -13,19 +20,23 @@ h2{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 50px;
-    width: 80%;
+    /* padding: 50px; */
     height: auto;
+    justify-content: space-around;
+    width: 80%;
 }
 
 .card_anime{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 15px 15px;
     margin: 15px;
     background-color: #303030;
     color: white;
+    cursor: pointer;
+    width: auto;
+    /* width: 20%; */
 }
 
 .card_anime h4{
@@ -36,6 +47,56 @@ h2{
     height: 200px;
     width: auto;
 }
+
+.info_animes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 30%;
+    height: 90vh;
+    background-color: #303030;
+    color: white;
+    border-radius: 15px 0 0 15px;
+    overflow: auto;
+}
+
+.info_animes h2{
+    margin-top: 7vh;
+}
+
+.info_animes img{
+    height: 30%;
+    width: auto;
+    margin-bottom: 3vh;
+}
+
+.info_horizontal{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-bottom: 3vh;
+}
+
+.info_vertical{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-bottom: 3vh;
+}
+
+.info_horizontal h4, .info_horizontal p{
+    margin: 0;
+}
+
+.margin_right{
+    display: flex;
+    width: 30%;
+    height: 100%;
+}
+
+
 
 .sem_resultados{
     display: flex;

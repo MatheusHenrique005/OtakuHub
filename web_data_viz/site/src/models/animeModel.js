@@ -16,14 +16,26 @@ function todos_animes(){
     console.log("listar todos_animes, ok")
 
     var instrucao = `
-        SELECT * FROM anime_manga
+        SELECT id_anime_manga, nome, foto_capa FROM anime_manga
     `;
-    
+
     console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function trazer_info(id_anime){
+    console.log("Model trazer_info, ok");
+
+    var instrucao = `
+        SELECT * FROM anime_manga 
+        WHERE id_anime_manga = ${id_anime};
+    `;
+
     return database.executar(instrucao);
 }
 
 module.exports = {
     cadastrar_anime,
-    todos_animes
+    todos_animes,
+    trazer_info
 }
