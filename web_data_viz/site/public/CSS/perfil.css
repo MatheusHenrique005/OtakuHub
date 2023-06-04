@@ -1,61 +1,88 @@
-.conteudoPagina {
+.margin_top{
     display: flex;
-    flex-direction: row;
-    align-items: start;
-    justify-content : space-around;
-    background-color: #101010;
-    padding-top: 3vh;
+    height: 10vh;
 }
 
-h2{
+.conteudo_pagina{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 12vh;
-    margin-bottom: 0;
-    color: white;
-    width: 100%;
-    height: 5vh;
+    flex-direction: row;   
 }
 
-.card{
+.margin_left{
     display: flex;
+    width: 30%;
+    height: 100%;
+}
+
+.card_perfil{
+    display: flex;
+    position: fixed;
     flex-direction: column;
     align-items: center;
-    width: 15vw;
-    height: 70vh;
+    height: 90vh;
+    width: 30%;
     background-color: #303030;
-    color: white;
-    overflow: hidden;
+    border-radius: 0px 20px 20px 0px;
 }
 
-.titulo_card{
+.imagem_perfil{
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-top: 6vh;
+}
+
+.imagem_perfil img{
+    width: 100%;
+}
+
+.info_usuario{
+    width: 60%;
+    color: white;
+    margin: 5vh 0vw;
+}
+
+.info_usuario h3{
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    height: 50px;
-    background-color: #0A0A0A;
 }
 
-.seguindo{
+.botao button {
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    font-size: 20px;
+    background-color: #101010;
+    border: none;
+    color: white;
+}
+
+.botao_nova_publicacao{
+    display: flex;
+    width: 100%;
+    margin-top: 3vh;
+    justify-content: right;
+}
+
+.botao_nova_publicacao button {
+    padding: 1vh 1vw;
+    border-radius: 7px;
+    font-size: 20px;
+    background-color: #303030;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+.publicacoes{
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    width: 80%;
-}
-
-.seguindo h4{
-    margin-bottom: 0;
-}
-
-.lista_card{
-    display: flex;
-    flex-direction: column;
-}
-
-.lista_card span{
-    margin-left: 15px;
+    align-items: center;
+    color: white;
+    width: 50%;
+    margin: 0 10%;
 }
 
 .feed{
@@ -63,7 +90,7 @@ h2{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 100%;
     height: max-content;
 }
 
@@ -85,10 +112,9 @@ h2{
     width: 100%;
     height: 50px;
     background-color: #0A0A0A;
-    color: white;
 }
 
-.info_usuario{
+.info_usuario_barra{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -144,8 +170,8 @@ h2{
 }
 
 .imagem_postagem img{
-    height: auto;
-    width: 80%;
+    max-height: 300px;
+    max-width: 80%;
 }
 
 .texto_postagem{
@@ -158,4 +184,3 @@ h2{
 .texto_postagem p{
     width: 80%;
 }
-

@@ -48,6 +48,9 @@
             </div>
             <textarea id="textarea_conteudo" placeholder="Digite seu texto"></textarea>
             <input type="file" id="foto">
+            <div id="div_aguardar" class="loading-div">
+                <img src="IMG/loading.gif" id="loading-gif">
+            </div>
             <button onclick="publicar()">Publicar</button>
         </div>
 
@@ -61,7 +64,7 @@
 <script>
 
     function publicar() {
-        // aguardar();
+        aguardar();
 
         const formData = new FormData();
         formData.append('foto', foto.files[0])
@@ -73,13 +76,13 @@
         fetch("/posts/publicar", {
             method: "POST",
             body: formData
-        }).then(resposta => {
+        }).then((resposta) => {
             console.log(resposta);
         })
 
         // setTimeout(() => {
         //     cardErro.style.display = "none";
-        //     // finalizarAguardar();
+        //     finalizarAguardar();
         //     setTimeout(() => {
         //         window.location = "index.html";
         //     }, 150);
@@ -91,3 +94,4 @@
 
 
 </script>
+

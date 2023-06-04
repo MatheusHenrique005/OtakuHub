@@ -29,7 +29,7 @@ CREATE TABLE votacao (
 
 CREATE TABLE publicacao (
     id_publicacao INT NOT NULL AUTO_INCREMENT,
-    imagem VARCHAR(150),
+    imagem VARCHAR(300),
     titulo VARCHAR(45),
     conteudo VARCHAR(1500),
     dt_publicacao DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -97,10 +97,10 @@ SELECT id_usuario, count(id_publicacao) FROM publicacao
         GROUP BY id_usuario
         ORDER BY count(id_publicacao) DESC;
 
-SELECT * FROM anime_manga;
+
+
+SELECT * FROM publicacao
+            JOIN usuario ON id_usuario = fk_usuario
+        ORDER BY id_publicacao;
 
 SELECT * FROM publicacao;
-
-DESCRIBE publicacao;
-
-ALTER TABLE publicacao modify column imagem VARCHAR(5000);
