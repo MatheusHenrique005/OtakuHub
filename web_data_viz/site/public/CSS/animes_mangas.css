@@ -1,0 +1,48 @@
+.conteudo_pagina {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 85vh;
+}
+
+h2{
+    color: white;
+}
+
+.animes_mangas{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 50px;
+    width: 80%;
+    height: auto;
+}
+
+.card_anime{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    margin: 15px;
+    background-color: #303030;
+    color: white;
+}
+
+.card_anime h4{
+    margin: 0 0 15px 0;
+}
+
+.card_anime img{
+    height: 200px;
+    width: auto;
+}
+
+.sem_resultados{
+    display: flex;
+    height: 60px;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: #0A0A0A;
+    color: white;
+}

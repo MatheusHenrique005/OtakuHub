@@ -67,10 +67,10 @@
         aguardar();
 
         const formData = new FormData();
-        formData.append('foto', foto.files[0])
-        formData.append('idUsuario', sessionStorage.ID_USUARIO)
-        formData.append('titulo', input_titulo.value)
-        formData.append('conteudo', textarea_conteudo.value)
+        formData.append('foto', foto.files[0]);
+        formData.append('idUsuario', sessionStorage.ID_USUARIO);
+        formData.append('titulo', input_titulo.value);
+        formData.append('conteudo', textarea_conteudo.value);
 
 
         fetch("/posts/publicar", {
@@ -80,13 +80,13 @@
             console.log(resposta);
         })
 
-        // setTimeout(() => {
-        //     cardErro.style.display = "none";
-        //     finalizarAguardar();
-        //     setTimeout(() => {
-        //         window.location = "index.html";
-        //     }, 150);
-        // }, 1000);
+        setTimeout(() => {
+            cardErro.style.display = "none";
+            finalizarAguardar();
+            setTimeout(() => {
+                window.location = "index.html";
+            }, 150);
+        }, 1000);
     }
 
 

@@ -4,6 +4,7 @@ USE OtakuHub;
 CREATE TABLE usuario (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(150),
+    foto_perfil VARCHAR(300)
     nick VARCHAR(45),
     dtNasc DATE,
     nivel char(3) DEFAULT 'cmm',
@@ -103,4 +104,15 @@ SELECT * FROM publicacao
             JOIN usuario ON id_usuario = fk_usuario
         ORDER BY id_publicacao;
 
-SELECT * FROM publicacao;
+DESCRIBE anime_manga;
+
+SELECT * FROM anime_manga;
+
+ALTER TABLE usuario ADD COLUMN foto_perfil VARCHAR(300);
+ALTER TABLE anime_manga ADD COLUMN foto_capa VARCHAR(300);
+
+INSERT INTO anime_manga (nome, sinopse, autor, genero, foto_capa) 
+VALUES ('${nome}', sinopse, autor, genero, foto_capa)
+
+DELETE FROM anime_manga WHERE id_anime_manga = 1;
+

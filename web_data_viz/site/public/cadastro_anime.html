@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +11,31 @@
     <script src="JS/funcoes.js"></script>
     <title>Cadastro Anime | OtakuHub</title>
 </head>
+
 <body>
     <div class="margin_top">
+    </div>
+
+    <div class="conteudo_pagina">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+        </div>
+        <div class="card_cadastro">
+            <h2>Cadastro de Animes ou Mangás</h2>
+            <div class="campos">
+                <input id="input_nome" class="input" placeholder="Nome do Anime ou Mangá">
+                <div class="campos_horizontal">
+                    <input id="input_autor" class="input_metade" placeholder="Autor">
+                    <input id="input_genero" class="input_metade" placeholder="Gênero">
+                </div>
+                <textarea name="sinopse" id="textarea_sinopse" cols="50" rows="5"></textarea>
+                <input type="file" accept="image/*" id="foto">
+            </div>
+            <div id="div_aguardar" class="loading-div">
+                <img src="IMG/loading.gif" id="loading-gif">
+            </div>
+            <button onclick="cadastrar_anime()">Cadastrar Anime</button>
+        </div>
     </div>
     <header class="header">
         <ul id="navegacao" class="navegacao">
@@ -30,19 +54,6 @@
         </div>
 
     </header>
-    <div class="conteudo_pagina">
-        <div class="card_cadastro">
-            <h2>Cadastro de Animes ou Mangás</h2>
-            <div class="campos">
-                <input id="input_nome" class="input" placeholder="Nome do Anime ou Mangá">
-                <div class="campos_horizontal">
-                    <input id="input_autor" class="input_metade" placeholder="Autor">
-                    <input id="input_genero" class="input_metade" placeholder="Gênero">
-                </div>
-                <textarea name="sinopse" id="textarea_sinopse" cols="50" rows="5"></textarea>
-            </div>
-        </div>
-    </div>
     <footer class="footer">
         <div class="margin_left"></div>
         <p>
@@ -50,27 +61,34 @@
         </p>
     </footer>
 </body>
+
 </html>
 <script>
 
-function cadastrar_anime(){
-    var nome = input_nome.value;
-    var autor = input_autor.value;
-    var genero = input_genero.value;
-    var sinopse = textarea_sinopse.value;
+    function cadastrar_anime() {
+        aguardar();
 
-    fetch("/posts/cadastrar_anime", {
+        const formData = new FormData();
+        formData.append('foto', foto.files[0]);
+        formData.append('nome', input_nome.value);
+        formData.append('autor', input_autor.value);
+        formData.append('genero', input_genero.value);
+        formData.append('sinopse', textarea_sinopse.value);
+
+        fetch("/animes/cadastrar_anime", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body:JSON.stringify({
-                nomeServer: nome,
-                autorServer: autor,
-                generoServer: genero,
-                sinopseServer: sinopse
-            })
+            body: formData
+        }).then((resposta) => {
+            console.log(resposta);
         })
-}
+
+        setTimeout(() => {
+            cardErro.style.display = "none";
+            finalizarAguardar();
+            // setTimeout(() => {
+            //     window.location = "animes.html";
+            // }, 150);
+        }, 1000);
+    }
 
 </script>

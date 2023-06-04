@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
     <title>Animes | OtakuHub</title>
 </head>
-<body>
+<body onload="todos_animes()">
     <header class="header">
         <ul class="navegacao">
             <li><a href="index.html">Home</a></li>
@@ -27,5 +27,64 @@
         </div>
 
     </header>
+    <div class="margin_top">
+    </div>
+    <div class="conteudo_pagina">
+
+
+        <h2>Lista de Animes e Mangás</h2>
+
+        <div id="animes_mangas" class="animes_mangas">
+            
+
+        </div>
+
+
+    </div>
+    <footer class="footer">
+        <p>
+            ©OtakuHub 2023 - Todos os direitos reservados
+        </p>
+    </footer>
 </body>
 </html>
+<script>
+    function todos_animes() {
+        var sla = "ok";
+        fetch("/animes/todos_animes").then(function (resposta) {
+            console.log(resposta);
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    animes_mangas.style.justifyContent = "center";
+                    animes_mangas.innerHTML = `
+                        <div class="barra_superior">
+                            <h3>Nenhum resultado encontrado</h3>
+                        </div>
+                    `;
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    animes_mangas.innerHTML = "";
+                    for (var i = resposta.length - 1; i >= 0; i--) {
+                        var nome = resposta[i].nome;
+                        var foto = resposta[i].foto_capa;
+                        
+                        animes_mangas.innerHTML += `
+                            <div class="card_anime">
+                                <h4>${nome}</h4>
+                                <img src="assets/${foto}" alt="">
+                            </div>
+                        `;
+                    }
+                })
+            }
+            console.log(sla);
+        }).catch(function(erro) {
+            console.log(`#ERRO: ${erro}`);
+        })
+
+        
+    }
+</script>
