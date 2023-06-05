@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="CSS/index.css">
     <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
     <script src="JS/funcoes.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Feed | OtakuHub</title>
 </head>
@@ -206,7 +204,7 @@
         data: {
             labels: linhas,
             datasets: [{
-                label: 'Mais Assistidos',
+                label: 'Usuarios',
                 data: dados,
                 backgroundColor: 'rgba(54, 162, 235, 0.5)', // Cor das barras
                 borderColor: 'rgba(54, 162, 235, 1)', // Cor das bordas
@@ -216,12 +214,7 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            indexAxis: 'y',
-            plugins: {
-                datalabels: {
-                    display: false
-                }
-            }
+            indexAxis: 'y'
         }
     });
 
