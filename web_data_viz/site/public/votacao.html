@@ -12,7 +12,7 @@
     <title>Votação | OtakuHub</title>
 </head>
 
-<body>
+<body onload="listar_animes()">
     <header class="header">
         <ul class="navegacao">
             <li><a href="index.html">Home</a></li>
@@ -35,82 +35,18 @@
     <div class="margin_top"></div>
 
     <div class="conteudo_pagina">
-        <h2>Escolha os animes/mangás que já assistiu/leu</h2>
-        <div class="campos_horizontal">
-            <div class="campos_vertical">
+        <div class="lista">
+            <h2>Escolha os animes/mangás que já assistiu/leu</h2>
+            <div id="campos" class="campos">
                 <div class="campo">
                     <input type="checkbox" name="anime" id="anime1" value="Naruto_Shippuden">
                     <label for="anime1">Naruto Shippuden</label>
                 </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime2" value="Dragon_Ball">
-                    <label for="anime2">Dragon Ball</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime3" value="One_Piece">
-                    <label for="anime3">One Piece</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime4" value="Bleach">
-                    <label for="anime4">Bleach</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime5" value="Mob_Psycho">
-                    <label for="anime5">Mob Psycho</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime6" value="Attack_on_Titan">
-                    <label for="anime6">Attack on Titan</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime7" value="Hunter_x_Hunter">
-                    <label for="anime7">Hunter x Hunter</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime8" value="Cavaleiros_do_Zodiaco">
-                    <label for="anime8">Cavaleiros do Zodíaco</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime9" value="Akame_ga_Kill">
-                    <label for="anime9">Akame ga Kill!</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime10" value="Noragami">
-                    <label for="anime10">Noragami</label>
-                </div>
             </div>
-            <div class="campos_vertical">
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime11" value="Tokyo_Refegenrs">
-                    <label for="anime11">Tokyo Revengers</label>
+            <div class="botao">
+                <button onclick="enviar_votos()">Enviar</button>
+            </div>
                 </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime12" value="Black_Clover">
-                    <label for="anime12">Black Clover</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime13" value="Dr_Stone">
-                    <label for="anime13">Dr. Stone</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime14" value="Boku_no_Hero_Academia">
-                    <label for="anime14">Boku no Hero Academia</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime15" value="Death_Note">
-                    <label for="anime15">Death Note</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime16" value="Fairy_Tail">
-                    <label for="anime16">Fairy Tail</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime17" value="Demon_Slayer">
-                    <label for="anime17">Demon Slayer</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime18" value="Nanatsu_no_Taizai">
-                    <label for="anime18">Nanatsu no Taizai</label>
                 </div>
                 <div class="campo">
                     <input type="checkbox" name="anime" id="anime19" value="One_Punch-man">
@@ -125,9 +61,22 @@
         <div class="botao">
             <button onclick="enviar_votos()">Enviar</button>
         </div>
-        <div id="div_aguardar" class="loading-div">
-            <img src="IMG/loading.gif" id="loading-gif">
+                <div class="campo">
+                    <input type="checkbox" name="anime" id="anime19" value="One_Punch-man">
+                    <label for="anime19">One Punch-Man</label>
+                </div>
+                <div class="campo">
+                    <input type="checkbox" name="anime" id="anime20" value="Chainsaw_Man">
+                    <label for="anime20">Chainsaw Man</label>
+                </div>
+            </div>
         </div>
+        <div class="botao">
+            <button onclick="enviar_votos()">Enviar</button>
+    </div>
+    <div id="div_aguardar" class="loading-div">
+        <img src="IMG/loading.gif" id="loading-gif">
+    </div>
 
     </div>
 
@@ -142,9 +91,8 @@
 
 <script>
 
-    var checkboxes = document.getElementsByName("anime");
 
-    if (sessionStorage.FOTO_USUARIO != undefined) {
+    if (sessionStorage.FOTO_USUARIO != "null") {
         img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
     }
     if (sessionStorage.length == 0) {
@@ -152,29 +100,92 @@
     }
 
     function enviar_votos() {
+        aguardar()
 
+        var checkboxes = document.getElementsByName("anime");
         var animesSelecionados = [];
 
         for (var i = 0; i < checkboxes.length; i++) {
 
             var checkbox = checkboxes[i];
-
             if (checkbox.checked) {
-                animesSelecionados.push(checkbox.value);
+                animesSelecionados.push(Number(checkbox.value));
             }
         }
+
+        for (var i = 0; i < animesSelecionados.length; i++) {
+            var voto = animesSelecionados[i];
+
+            fetch("/animes/enviar_votos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: sessionStorage.ID_USUARIO,
+                    votoServer: voto
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    console.log(resposta);
+                }
+            }).catch(function (resposta) {
+                console.log("Deu ruim, mano");
+            })
+        }
+
+
 
         cardErro.style.display = "block"
         mensagem_erro.innerHTML = "Obrigado por votar";
         finalizarAguardar();
-        
-        setTimeout(()=> {
+
+        setTimeout(() => {
             cardErro.style.display = "none";
             setTimeout(()=>{
-                window.location = "index.html";
+                if (sessionStorage.NIVEL_USUARIO) {
+                    window.location = "dashboard.html"
+                }
+                window.location = "dashboard.html";
             }, 500);
         }, 2000);
 
+    }
+
+    function listar_animes() {
+        fetch("/animes/todos_animes").then(function (resposta) {
+            console.log(resposta);
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    campos.style.justifyContent = "center";
+                    campos.innerHTML = `
+                        <div class="sem_resultados">
+                            <h3>Nenhum resultado encontrado</h3>
+                        </div>
+                    `;
+                }
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    campos.innerHTML = "";
+                    for (var i = resposta.length - 1; i >= 0; i--) {
+                        var nome = resposta[i].nome;
+                        var id_anime = resposta[i].id_anime_manga;
+
+                        campos.innerHTML += `
+                            <div class="campo">
+                                <input type="checkbox" name="anime" id="anime${i}" value="${id_anime}">
+                                <label for="anime${i}">${nome}</label>
+                            </div>
+                        `;
+                    }
+                })
+            }
+            console.log(sla);
+        }).catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+        })
     }
 
 

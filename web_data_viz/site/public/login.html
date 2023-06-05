@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/login.css">
     <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
+    <script src="JS/funcoes.js"></script>
     <title>Login | OtakuHub</title>
 </head>
 
@@ -58,7 +59,7 @@
 
 <script>
 
-    if (sessionStorage.FOTO_USUARIO != undefined) {
+    if (sessionStorage.FOTO_USUARIO != "null") {
         img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
     }
     
@@ -129,6 +130,7 @@
                     sessionStorage.ID_USUARIO = json.id_usuario;
                     sessionStorage.NIVEL_USUARIO = json.nivel;
                     sessionStorage.FOTO_USUARIO = json.foto_perfil;
+                    sessionStorage.NASCIMENTO_USUARIO = json.dtNasc;
 
                     setTimeout(function () {
                         window.location = "index.html";

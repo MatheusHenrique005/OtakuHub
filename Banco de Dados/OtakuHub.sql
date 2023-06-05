@@ -104,9 +104,9 @@ SELECT * FROM publicacao
             JOIN usuario ON id_usuario = fk_usuario
         ORDER BY id_publicacao;
 
-DESCRIBE usuario;
+DESCRIBE votacao;
 
-SELECT * FROM usuario;
+SELECT * FROM votacao;
 
 ALTER TABLE usuario ADD COLUMN foto_perfil VARCHAR(300);
 ALTER TABLE anime_manga ADD COLUMN foto_capa VARCHAR(300);
@@ -116,3 +116,12 @@ VALUES ('${nome}', sinopse, autor, genero, foto_capa)
 
 DELETE FROM anime_manga WHERE id_anime_manga = 1;
 
+INSERT INTO votacao (fk_usuario, fk_anime_manga)
+VALUES (${id_usuario}, ${voto});
+
+SELECT nome,
+    count(fk_usuario) as votos
+FROM votacao
+    JOIN anime_manga ON id_anime_manga = fk_anime_manga
+GROUP BY fk_anime_manga
+ORDER BY votos DESC;

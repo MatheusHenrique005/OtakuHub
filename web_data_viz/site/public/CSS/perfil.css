@@ -5,7 +5,8 @@
 
 .conteudo_pagina{
     display: flex;
-    flex-direction: row;   
+    flex-direction: row;
+    min-height: 85vh;
 }
 
 .margin_left{

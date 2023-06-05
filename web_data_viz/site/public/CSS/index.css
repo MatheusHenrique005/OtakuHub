@@ -27,6 +27,7 @@ h2{
     background-color: #303030;
     color: white;
     overflow: hidden;
+    padding-bottom: 20px;
 }
 
 .titulo_card{
@@ -56,6 +57,13 @@ h2{
 
 .lista_card span{
     margin-left: 15px;
+}
+
+.centralizar_titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: auto;
 }
 
 .feed{

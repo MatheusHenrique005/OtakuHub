@@ -45,7 +45,7 @@
                 <p>Nome: <span id="span_nome">Matheus Henrique</span></p>
                 <p>Idade: <span id="span_idade">18</span> anos</p>
                 <p>E-mail: <span id="span_email">matheus.henrique@sptech.school</span></p>
-                <p id="p_nova_senha" class="nova_senha">Nova Senha: <input id="input_senha" type="text"
+                <p id="p_nova_senha" class="nova_senha">Nova Senha: <input id="input_senha" type="password"
                         placeholder="Nova Senha"></p>
                 <p id="p_dtNasc">Aniversário: <span id="span_aniversario">03-05</span></p>
             </div>
@@ -116,7 +116,7 @@
 </html>
 <script>
 
-    if (sessionStorage.FOTO_USUARIO != undefined) {
+    if (sessionStorage.FOTO_USUARIO != "null") {
         img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
         imagem_perfil.src = `assets/${sessionStorage.FOTO_USUARIO}`;
     }
@@ -136,64 +136,59 @@
     }
 
     function listar_publicacoes_usuario(idUsuario) {
-        fetch(`/posts/listar_publicacoes_usuario/${idUsuario}`, { cache: 'no-store' })
-            .then(function (resposta) {
-                if (resposta.ok) {
-                    if (resposta.status == 204) {
-                        feed.innerHTML = `
+        fetch(`/posts/listar_publicacoes_usuario/${idUsuario}`, { cache: 'no-store' }).then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    feed.innerHTML = `
                         <div class="postagem">
                             <div class="barra_superior">
                                 <h3>Nenhum resultado encontrado</h3>
                             </div>
                         </div>
                     `;
-                    }
+                }
 
-                    resposta.json().then(function (resposta) {
-                        console.log("Dados recebidos: ", JSON.stringify(resposta));
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                        feed.innerHTML = "";
-                        for (var i = resposta.length - 1; i >= 0; i--) {
-                            var nick = resposta[i].nick;
-                            var titulo = resposta[i].titulo;
-                            var conteudo = resposta[i].conteudo;
-                            var imagem = resposta[i].imagem;
+                    feed.innerHTML = "";
+                    for (var i = resposta.length - 1; i >= 0; i--) {
+                        var nick = resposta[i].nick;
+                        var titulo = resposta[i].titulo;
+                        var conteudo = resposta[i].conteudo;
+                        var imagem = resposta[i].imagem;
 
-                            feed.innerHTML += `
-                                <div id="postagem${i}" class="postagem">
-                                    <div class="barra_superior">
-                                        <div class="info_usuario_barra">
-                                            <div class="icone_usuario">
-                                                <img id="img_avatar" src="IMG/avatar.png" alt="">
-                                            </div>
-                                            <p id="p_nick">${nick}</p>
+                        feed.innerHTML += `
+                            <div id="postagem${i}" class="postagem">
+                                <div class="barra_superior">
+                                    <div class="info_usuario_barra">
+                                        <div class="icone_usuario">
+                                            <img id="img_avatar" src="IMG/avatar.png" alt="">
                                         </div>
-                                        <button class="btn_seguir">
-                                            Seguir
-                                        </button>
+                                        <p id="p_nick">${nick}</p>
                                     </div>
-                                    <div class="conteudo_postagem">
-                                        <div class="titulo_postagem">
-                                            <h3 id="h3_titulo">${titulo}</h3>
-                                        </div>
-                                        <div class="texto_postagem">
-                                            <p id="p_conteudo">${conteudo}</p>
-                                        </div>
-                                        <div class="imagem_postagem">
-                                            <img id="" src="assets/${imagem}" alt="">
-                                            
-                                        </div>
+                                    <button class="btn_seguir">
+                                        Seguir
+                                    </button>
+                                </div>
+                                <div class="conteudo_postagem">
+                                    <div class="titulo_postagem">
+                                        <h3 id="h3_titulo">${titulo}</h3>
+                                    </div>
+                                    <div class="texto_postagem">
+                                        <p id="p_conteudo">${conteudo}</p>
+                                    </div>
+                                    <div class="imagem_postagem">
+                                        <img id="" src="assets/${imagem}" alt="">
+                                        
                                     </div>
                                 </div>
-                            `;
-                        }
-
-
-
-                    })
-
-                }
-            })
+                            </div>
+                        `;
+                    }
+                })
+            }
+        })
     }
 
     function editar_perfil() {
@@ -207,16 +202,16 @@
         `;
 
         span_nick.innerHTML = `
-            <input id="input_nick" type="text" placeholder="Novo Nick">
+            <input id="input_nick" type="text" value="${sessionStorage.NICK_USUARIO}" placeholder="Novo Nick">
         `;
         span_nome.innerHTML = `
-            <input id="input_nome" type="text" placeholder="Novo Nome">
+            <input id="input_nome" type="text" value="${sessionStorage.NOME_USUARIO}" placeholder="Novo Nome">
         `;
         span_email.innerHTML = `
-            <input id="input_email" type="text" placeholder="Novo Email">
+            <input id="input_email" type="text" value="${sessionStorage.EMAIL_USUARIO}" placeholder="Novo Email">
         `;
         span_aniversario.innerHTML = `
-            <input id="input_dtNasc" type="date" >
+            <input id="input_dtNasc" type="date"  value="${sessionStorage.NASCIMENTO_USUARIO}" >
         `;
 
     }
@@ -301,7 +296,7 @@
                         finalizarAguardar(texto);
                     });
                 }
-                if (sessionStorage.FOTO_USUARIO != undefined) {
+                if (sessionStorage.FOTO_USUARIO != "null") {
                     img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
                     imagem_perfil.src = `assets/${sessionStorage.FOTO_USUARIO}`;
                 }

@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="CSS/index.css">
     <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
     <script src="JS/funcoes.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Feed | OtakuHub</title>
 </head>
 
-<body onload="validarSessao(), listar_publicacoes()">
+<body onload="validarSessao(), listar_publicacoes(), trazer_votos()">
     <header class="header">
         <ul class="navegacao">
             <li><a href="index.html">Home</a></li>
@@ -36,16 +39,9 @@
     <div class="conteudoPagina">
         <div class="card">
             <div class="titulo_card">
-                <h3>Seguindo</h3>
+                <h3>Mais Vistos</h3>
             </div>
-            <div class="seguindo">
-                <div class="lista_card">
-                    <h4>Perfis</h4>
-                    <span>@TheusBr05</span>
-                    <span>@TheusBr05</span>
-                    <span>@TheusBr05</span>
-                </div>
-            </div>
+            <canvas id="animes_mais_vistos"></canvas>
         </div>
         <div id="feed" class="feed">
 
@@ -120,7 +116,7 @@
                     <span>@TheusBr05</span>
                     <span>@TheusBr05</span>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -138,7 +134,7 @@
     if (sessionStorage.length == 0) {
         window.location = "login.html";
     }
-    if (sessionStorage.FOTO_USUARIO != undefined) {
+    if (sessionStorage.FOTO_USUARIO != "null") {
         img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
     }
 
@@ -164,12 +160,14 @@
                         var titulo = resposta[i].titulo;
                         var conteudo = resposta[i].conteudo;
                         var imagem = resposta[i].imagem;
+                        var avatar = resposta[i].foto_perfil
+
                         feed.innerHTML += `
                             <div id="postagem${i}" class="postagem">
                                 <div class="barra_superior">
                                     <div class="info_usuario">
                                         <div class="icone_usuario">
-                                            <img id="img_avatar" src="IMG/avatar.png" alt="">
+                                            <img id="img_avatar" src="assets/${avatar}" alt="">
                                         </div>
                                         <p id="p_nick">${nick}</p>
                                     </div>
@@ -196,4 +194,55 @@
             }
         })
     }
+
+    var linhas = [];
+    var dados = [];
+
+    ;
+
+    const grafico_votos = new Chart(
+        document.getElementById('animes_mais_vistos'), {
+        type: 'bar',
+        data: {
+            labels: linhas,
+            datasets: [{
+                label: 'Mais Assistidos',
+                data: dados,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)', // Cor das barras
+                borderColor: 'rgba(54, 162, 235, 1)', // Cor das bordas
+                borderWidth: 1 // Largura das bordas
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: {
+                datalabels: {
+                    display: false
+                }
+            }
+        }
+    });
+
+
+    function trazer_votos() {
+        fetch("/animes/trazer_votos", {
+            cache: 'no-store'
+        }).then(function (resposta) {
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    for (let i = 0; i < resposta.length; i++) {
+                        linhas.push(resposta[i].nome)
+                        dados.push(resposta[i].votos)
+                    }
+
+                    grafico_votos.update();
+                })
+            }
+        })
+    }
+
+
+
 </script>

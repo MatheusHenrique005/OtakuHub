@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/animes_mangas.css">
     <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
+    <script src="JS/funcoes.js"></script>
     <title>Animes | OtakuHub</title>
 </head>
 
@@ -65,7 +66,7 @@
 
 </html>
 <script>
-    if (sessionStorage.FOTO_USUARIO != undefined) {
+    if (sessionStorage.FOTO_USUARIO != "null") {
         img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
     }
     if (sessionStorage.length == 0) {
