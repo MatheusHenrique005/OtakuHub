@@ -85,6 +85,7 @@
 
     function entrar() {
         aguardar();
+        
         input_senha.style.marginBottom = "0px";
 
         var emailVar = input_email.value;
@@ -131,6 +132,7 @@
                     sessionStorage.NIVEL_USUARIO = json.nivel;
                     sessionStorage.FOTO_USUARIO = json.foto_perfil;
                     sessionStorage.NASCIMENTO_USUARIO = json.dtNasc;
+                    sessionStorage.SENHA_USUARIO = json.senha;
 
                     setTimeout(function () {
                         window.location = "index.html";

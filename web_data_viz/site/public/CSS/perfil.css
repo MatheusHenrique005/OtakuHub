@@ -27,6 +27,9 @@
 }
 
 .imagem_perfil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 200px;
     height: 200px;
     border-radius: 100%;
@@ -35,7 +38,9 @@
 }
 
 .imagem_perfil img{
-    width: 100%;
+    width: auto;
+    height: 100%;
+    
 }
 
 .info_usuario{
@@ -133,6 +138,8 @@
 
 .icone_usuario{
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 30px;
     height: 30px;
     overflow: hidden;
@@ -143,6 +150,10 @@
     width: 100%;
     height: 100%;
     background-color: #303030;
+}
+
+.nick{
+    margin-left: 7px;
 }
 
 .btn_seguir{

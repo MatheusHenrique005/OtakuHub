@@ -30,6 +30,10 @@ h2{
     padding-bottom: 20px;
 }
 
+.card canvas{
+    padding-right: 10px;
+}
+
 .titulo_card{
     display: flex;
     justify-content: center;
@@ -53,10 +57,15 @@ h2{
 .lista_card{
     display: flex;
     flex-direction: column;
+    padding-top: 2vh;
 }
 
 .lista_card span{
-    margin-left: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
 }
 
 .centralizar_titulo{
@@ -105,6 +114,8 @@ h2{
 
 .icone_usuario{
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 30px;
     height: 30px;
     overflow: hidden;
@@ -115,6 +126,10 @@ h2{
     width: 100%;
     height: 100%;
     background-color: #303030;
+}
+
+.nick{
+    margin-left: 7px;
 }
 
 .btn_seguir{
@@ -163,7 +178,7 @@ h2{
     margin-top: 1px;
     width: 100%;
 }
+
 .texto_postagem p{
     width: 80%;
 }
-

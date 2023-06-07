@@ -17,7 +17,7 @@ function entrar(email, senha) {
             timestampdiff(year, dtNasc, now()) as 'idade'
         FROM usuario
         WHERE email = '${email}'
-            AND senha = '${senha}';
+            AND senha = SHA2('${senha}', 256);
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -30,31 +30,68 @@ function cadastrar(nome, nick, nascimento, email, senha) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO usuario (nome, nick, dtNasc, email, senha) VALUES ('${nome}','${nick}', '${nascimento}', '${email}', '${senha}');
+        INSERT INTO usuario (nome, nick, dtNasc, email, senha) VALUES ('${nome}','${nick}', '${nascimento}', '${email}', SHA2('${senha}', 256));
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function atualizar_perfil(foto, id_usuario, nick, nome, email, dtNasc, senha){
+function atualizar_perfil(foto, id_usuario, nick, nome, email){
     var instrucao = `
         UPDATE usuario
         SET nome = '${nome}',
             nick = '${nick}',
-            dtNasc = '${dtNasc}',
             email = '${email}',
-            senha = '${senha}',
             foto_perfil = '${foto}'
         WHERE id_usuario = ${id_usuario};
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao)
+    return database.executar(instrucao);
+}
+
+function seguir(seguido, seguidor){
+    var instrucao = `
+        INSERT INTO seguidores VALUES
+        (${seguido}, ${seguidor});
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function mostrar_seguidores() {
+    var instrucao = `
+        SELECT nick,
+            count(fk_seguidor) as 'seguidores'
+        FROM seguidores
+            JOIN usuario ON fk_seguido = id_usuario
+        GROUP BY id_usuario
+        ORDER BY seguidores DESC;
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function verificar_seguindo(id_publicador, id_usuario){
+    var instrucao = `
+        SELECT *
+        FROM seguidores
+        WHERE fk_seguido = ${id_publicador}
+            AND fk_seguidor = ${id_usuario};
+    `;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    atualizar_perfil
+    atualizar_perfil,
+    seguir,
+    mostrar_seguidores,
+    verificar_seguindo
 };

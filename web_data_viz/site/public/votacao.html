@@ -19,7 +19,8 @@
             <li><a href="sobre.html">Saiba Mais</a></li>
             <li><a href="animes.html">Animes</a></li>
             <li><a href="votacao.html">Vote</a></li>
-            <li><button onclick="sair()" class="botao_sair">SAIR</button></li>
+            <li><button onclick="sair()" class="botao_header">SAIR</button></li>
+            <li><button onclick="perfil()" class="botao_header">PERFIL</button></li>
         </ul>
 
         <div class="perfil">
@@ -46,34 +47,9 @@
             <div class="botao">
                 <button onclick="enviar_votos()">Enviar</button>
             </div>
-                </div>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime19" value="One_Punch-man">
-                    <label for="anime19">One Punch-Man</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime20" value="Chainsaw_Man">
-                    <label for="anime20">Chainsaw Man</label>
-                </div>
-            </div>
         </div>
-        <div class="botao">
-            <button onclick="enviar_votos()">Enviar</button>
-        </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime19" value="One_Punch-man">
-                    <label for="anime19">One Punch-Man</label>
-                </div>
-                <div class="campo">
-                    <input type="checkbox" name="anime" id="anime20" value="Chainsaw_Man">
-                    <label for="anime20">Chainsaw Man</label>
-                </div>
-            </div>
-        </div>
-        <div class="botao">
-            <button onclick="enviar_votos()">Enviar</button>
     </div>
+    
     <div id="div_aguardar" class="loading-div">
         <img src="IMG/loading.gif" id="loading-gif">
     </div>
@@ -142,11 +118,11 @@
 
         setTimeout(() => {
             cardErro.style.display = "none";
-            setTimeout(()=>{
-                if (sessionStorage.NIVEL_USUARIO) {
-                    window.location = "dashboard.html"
+            setTimeout(() => {
+                if (sessionStorage.NIVEL_USUARIO == "adm") {
+                    window.location = "dashboard.html";
                 }
-                window.location = "dashboard.html";
+                window.location = "index.html"
             }, 500);
         }, 2000);
 
@@ -182,7 +158,6 @@
                     }
                 })
             }
-            console.log(sla);
         }).catch(function (erro) {
             console.log(`#ERRO: ${erro}`);
         })

@@ -5,11 +5,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="IMG/logos/logo_branca.png">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/dashboard.css">
+    <title>Dashboard | OtakuHub</title>
 </head>
-
 <body>
+    <header class="header">
+        <ul id="navegacao" class="navegacao">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="sobre.html">Saiba Mais</a></li>
+            <li><a href="animes.html">Animes</a></li>
+            <li><a href="votacao.html">Vote</a></li>
+            <li><button onclick="sair()" class="botao_header">SAIR</button></li>
+            <li><button onclick="perfil()" class="botao_header">PERFIL</button></li>
+        </ul>
 
+        <div class="perfil">
+            <a href="perfil.html">
+                <img id="img_avatar" src="IMG/avatar.png" alt="">
+            </a>
+        </div>
+
+    </header>
+    <div class="margin_top">
+    </div>
+    <div class="conteudo_pagina">
+        <div class="grafico_grande">
+            <h3>Animes Mais Vistos</h3>
+            <canvas id="animes_mais_vistos"></canvas>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="margin_left"></div>
+        <p>
+            ©OtakuHub 2023 - Todos os direitos reservados
+        </p>
+    </footer>
 </body>
 
 </html>
@@ -20,4 +52,28 @@
     if (sessionStorage.length == 0) {
         window.location = "login.html";
     }
+
+    const grafico_votos = new Chart(
+        document.getElementById('animes_mais_vistos'), {
+        type: 'bar',
+        data: {
+            labels: linhas,
+            datasets: [{
+                label: 'Usuarios',
+                data: dados,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)', // Cor das barras
+                borderColor: 'rgba(54, 162, 235, 1)', // Cor das bordas
+                borderWidth: 1 // Largura das bordas
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
 </script>

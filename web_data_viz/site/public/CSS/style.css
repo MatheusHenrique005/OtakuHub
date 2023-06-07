@@ -66,7 +66,7 @@ body {
     margin-right: 3vw;
 }
 
-.botao_sair{
+.botao_header{
     padding: 1vh 1vw;
     border-radius: 7px;
     font-size: 20px;
@@ -78,7 +78,7 @@ body {
     transition: .5s;
 }
 
-.header:hover .botao_sair{
+.header:hover .botao_header{
     opacity: 1;
     transition: .5s;
 }

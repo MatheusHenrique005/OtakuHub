@@ -1,0 +1,23 @@
+.conteudo_pagina{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 75vh;
+    padding: 5vh 0;
+}
+
+.grafico_grande{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 80%;
+    height: 30vh;
+    background-color: #303030;
+}
+
+.grafico_grande h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

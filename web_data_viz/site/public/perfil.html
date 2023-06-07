@@ -15,13 +15,17 @@
 <body onload="listar_publicacoes_usuario(sessionStorage.ID_USUARIO)">
     <div class="margin_top">
     </div>
+    <div class="card_erro" id="cardErro">
+        <span id="mensagem_erro"></span>
+    </div>
     <header class="header">
         <ul id="navegacao" class="navegacao">
             <li><a href="index.html">Home</a></li>
             <li><a href="sobre.html">Saiba Mais</a></li>
             <li><a href="animes.html">Animes</a></li>
             <li><a href="votacao.html">Vote</a></li>
-            <li><button onclick="sair()" class="botao_sair">SAIR</button></li>
+            <li><button onclick="sair()" class="botao_header">SAIR</button></li>
+            <li><button onclick="perfil()" class="botao_header">PERFIL</button></li>
         </ul>
 
         <div class="perfil">
@@ -31,9 +35,6 @@
         </div>
 
     </header>
-    <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
-    </div>
     <div class="conteudo_pagina">
         <div class="card_perfil">
             <div class="imagem_perfil">
@@ -45,9 +46,10 @@
                 <p>Nome: <span id="span_nome">Matheus Henrique</span></p>
                 <p>Idade: <span id="span_idade">18</span> anos</p>
                 <p>E-mail: <span id="span_email">matheus.henrique@sptech.school</span></p>
-                <p id="p_nova_senha" class="nova_senha">Nova Senha: <input id="input_senha" type="password"
-                        placeholder="Nova Senha"></p>
                 <p id="p_dtNasc">Aniversário: <span id="span_aniversario">03-05</span></p>
+                <p id="p_nova_senha" class="nova_senha">
+                    <input id="input_senha" type="password" placeholder="Digite sua senha">
+                </p>
             </div>
             <div id="botao" class="botao">
                 <button onclick="editar_perfil()">Editar Perfil</button>
@@ -146,26 +148,26 @@
                             </div>
                         </div>
                     `;
-                }
+                } else {
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+                    resposta.json().then(function (resposta) {
+                        console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                    feed.innerHTML = "";
-                    for (var i = resposta.length - 1; i >= 0; i--) {
-                        var nick = resposta[i].nick;
-                        var titulo = resposta[i].titulo;
-                        var conteudo = resposta[i].conteudo;
-                        var imagem = resposta[i].imagem;
+                        feed.innerHTML = "";
+                        for (var i = resposta.length - 1; i >= 0; i--) {
+                            var nick = resposta[i].nick;
+                            var titulo = resposta[i].titulo;
+                            var conteudo = resposta[i].conteudo;
+                            var imagem = resposta[i].imagem;
 
-                        feed.innerHTML += `
+                            feed.innerHTML += `
                             <div id="postagem${i}" class="postagem">
                                 <div class="barra_superior">
                                     <div class="info_usuario_barra">
                                         <div class="icone_usuario">
                                             <img id="img_avatar" src="IMG/avatar.png" alt="">
                                         </div>
-                                        <p id="p_nick">${nick}</p>
+                                        <p class="nick">${nick}</p>
                                     </div>
                                     <button class="btn_seguir">
                                         Seguir
@@ -185,8 +187,9 @@
                                 </div>
                             </div>
                         `;
-                    }
-                })
+                        }
+                    })
+                }
             }
         })
     }
@@ -195,7 +198,6 @@
         var id_usuario = sessionStorage.ID_USUARIO;
 
         foto.style.display = 'flex';
-        p_nova_senha.style.display = 'flex';
 
         botao.innerHTML = `
             <button onclick="atualizar_perfil(${id_usuario})">Atualizar</button>
@@ -210,100 +212,105 @@
         span_email.innerHTML = `
             <input id="input_email" type="text" value="${sessionStorage.EMAIL_USUARIO}" placeholder="Novo Email">
         `;
-        span_aniversario.innerHTML = `
-            <input id="input_dtNasc" type="date"  value="${sessionStorage.NASCIMENTO_USUARIO}" >
-        `;
+        p_dtNasc.style.display = 'none';
+        p_nova_senha.style.display = 'flex';
 
     }
 
     function atualizar_perfil() {
         aguardar();
 
-        const formData = new FormData();
-        formData.append('foto', foto.files[0]);
-        formData.append('id_usuario', sessionStorage.ID_USUARIO);
-        formData.append('nick', input_nick.value);
-        formData.append('nome', input_nome.value);
-        formData.append('email', input_email.value);
-        formData.append('dtNasc', input_dtNasc.value);
-        formData.append('senha', input_senha.value);
+        var emailVar = input_email.value;
+        var senhaVar = input_senha.value;
 
-        fetch("/usuarios/atualizar_perfil", {
+        fetch("/usuarios/autenticar", {
             method: "POST",
-            body: formData
-        }).then((resposta) => {
-            console.log(resposta);
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+            if (resposta.ok) {
+                const formData = new FormData();
+                formData.append('foto', foto.files[0]);
+                formData.append('id_usuario', sessionStorage.ID_USUARIO);
+                formData.append('nick', input_nick.value);
+                formData.append('nome', input_nome.value);
+                formData.append('email', input_email.value);
+
+                fetch("/usuarios/atualizar_perfil", {
+                    method: "POST",
+                    body: formData
+                }).then((response) => {
+                    console.log(response);
+                    if (response.ok) {
+                        fetch("/usuarios/autenticar", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                emailServer: emailVar,
+                                senhaServer: senhaVar
+                            })
+                        }).then((res) => {
+                            res.json().then(json => {
+                                console.log(json);
+                                console.log(JSON.stringify(json));
+    
+                                sessionStorage.EMAIL_USUARIO = json.email;
+                                sessionStorage.NICK_USUARIO = json.nick;
+                                sessionStorage.IDADE_USUARIO = json.idade
+                                sessionStorage.NOME_USUARIO = json.nome;
+                                sessionStorage.ID_USUARIO = json.id_usuario;
+                                sessionStorage.NIVEL_USUARIO = json.nivel;
+                                sessionStorage.FOTO_USUARIO = json.foto_perfil;
+    
+                                span_nick.innerHTML = sessionStorage.NICK_USUARIO;
+                                span_nome.innerHTML = sessionStorage.NOME_USUARIO;
+                                span_email.innerHTML = sessionStorage.EMAIL_USUARIO;
+                                span_idade.innerHTML = sessionStorage.IDADE_USUARIO;
+                                img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
+                                imagem_perfil.src = `assets/${sessionStorage.FOTO_USUARIO}`;
+    
+                                p_dtNasc.style.display = 'flex'
+                                p_nova_senha.style.display = ''
+                                foto.style.display = 'none';
+                                botao.innerHTML = `
+                                    <button onclick="editar_perfil(${sessionStorage.ID_USUARIO})">Editar Perfil</button>
+                                `;
+                                finalizarAguardar();
+
+                        })
+
+
+                        })
+
+                    }
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Algo deu errado :(";
+                finalizarAguardar();
+                return false;
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+
         })
 
-        setTimeout(() => {
-            var emailVar = input_email.value;
-            var senhaVar = input_senha.value;
-
-
-            fetch("/usuarios/autenticar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emailServer: emailVar,
-                    senhaServer: senhaVar
-                })
-            }).then(function (resposta) {
-                console.log("ESTOU NO THEN DO entrar()!")
-
-                if (resposta.ok) {
-                    console.log(resposta);
-
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-
-                        sessionStorage.EMAIL_USUARIO = json.email;
-                        sessionStorage.NICK_USUARIO = json.nick;
-                        sessionStorage.ANIVERSARIO_USUARIO = json.aniversario;
-                        sessionStorage.IDADE_USUARIO = json.idade
-                        sessionStorage.NOME_USUARIO = json.nome;
-                        sessionStorage.ID_USUARIO = json.id_usuario;
-                        sessionStorage.NIVEL_USUARIO = json.nivel;
-                        sessionStorage.FOTO_USUARIO = json.foto_perfil;
-
-                        span_nick.innerHTML = sessionStorage.NICK_USUARIO;
-                        span_nome.innerHTML = sessionStorage.NOME_USUARIO;
-                        span_email.innerHTML = sessionStorage.EMAIL_USUARIO;
-                        span_aniversario.innerHTML = sessionStorage.ANIVERSARIO_USUARIO;
-                        span_idade.innerHTML = sessionStorage.IDADE_USUARIO;
-                        img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
-                        imagem_perfil.src = `assets/${sessionStorage.FOTO_USUARIO}`;
-
-                        foto.style.display = 'none';
-                        p_nova_senha.style.display = 'none';
-
-                        finalizarAguardar();
-                    });
-
-                } else {
-
-                    console.log("Houve um erro ao tentar realizar o login!");
-
-                    cardErro.style.display = "block"
-                    mensagem_erro.innerHTML = "Algo deu errado :(";
-                    finalizarAguardar();
-                    return false;
-
-                    resposta.text().then(texto => {
-                        console.error(texto);
-                        finalizarAguardar(texto);
-                    });
-                }
-                if (sessionStorage.FOTO_USUARIO != "null") {
-                    img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
-                    imagem_perfil.src = `assets/${sessionStorage.FOTO_USUARIO}`;
-                }
-
-            })
-
-            // location.reload();
-        }, 500);
+        // location.reload();
     }
 </script>
