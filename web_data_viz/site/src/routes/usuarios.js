@@ -29,4 +29,17 @@ router.post("/atualizar_perfil", upload.single('foto'), function (req, res){
     usuarioController.atualizar_perfil(req, res);
 });
 
+router.post("/seguir", function(req, res){
+    usuarioController.seguir(req, res);
+})
+
+router.get("/mostrar_seguidores", function(req, res){
+    usuarioController.mostrar_seguidores(req, res);
+})
+
+router.get("/verificar_seguindo/:id_publicador/:id_usuario", function(req, res){
+    usuarioController.verificar_seguindo(req, res);
+})
+
+
 module.exports = router;

@@ -153,11 +153,100 @@ function atualizar_perfil(req, res) {
     usuarioModel.atualizar_perfil(foto, id_usuario, nick, nome, email, dtNasc, senha);
 }
 
+function atualizar_perfil(req, res) {
+
+    console.log("tá osso");
+
+    const foto = req.file.filename;
+    var id_usuario = req.body.id_usuario;
+    var nick = req.body.nick;
+    var nome = req.body.nome;
+    var email = req.body.email;
+
+    console.log(foto);
+
+    usuarioModel.atualizar_perfil(foto, id_usuario, nick, nome, email)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao atualizar perfil! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function seguir(req, res) {
+    var seguido = req.body.id_seguidoServer;
+    var seguidor = req.body.id_seguidorServer;
+
+    usuarioModel.seguir(seguido, seguidor)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao realizar o cadastro! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
+
+function mostrar_seguidores(req, res) {
+
+    usuarioModel.mostrar_seguidores()
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nHouve um erro ao buscar os seguidores! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
+function verificar_seguindo(req, res) {
+    var id_publicador = req.params.id_publicador;
+    var id_usuario = req.params.id_usuario;
+
+    usuarioModel.verificar_seguindo(id_publicador, id_usuario)
+        .then(function(resposta){
+            res.json(resposta);
+        }).catch(function (erro){
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao verificar se está seguindo! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        })
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
     testar,
-    votar,
-    atualizar_perfil
+    atualizar_perfil,
+    seguir,
+    mostrar_seguidores,
+    verificar_seguindo
 }

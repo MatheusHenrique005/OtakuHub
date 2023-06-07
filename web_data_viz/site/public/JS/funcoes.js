@@ -61,3 +61,7 @@ function sair(){
     sessionStorage.clear();
     window.location = "login.html"
 }
+
+function perfil() {
+    window.location = "perfil.html"
+}

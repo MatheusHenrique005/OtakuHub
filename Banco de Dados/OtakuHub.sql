@@ -12,6 +12,15 @@ CREATE TABLE usuario (
     senha VARCHAR(45)
 );
 
+CREATE TABLE seguidores(
+    fk_seguido INT,
+    fk_seguidor INT,
+    CONSTRAINT fk_usuario_seguido FOREIGN KEY (fk_seguido) REFERENCES usuario(id_usuario),
+    CONSTRAINT fk_usuario_seguidor FOREIGN KEY (fk_seguidor) REFERENCES usuario(id_usuario),
+    CONSTRAINT pk_seguidores PRIMARY KEY (fk_seguido, fk_seguidor)
+);
+
+
 CREATE TABLE anime_manga(
     id_anime_manga INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
