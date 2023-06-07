@@ -13,7 +13,7 @@
     <title>Feed | OtakuHub</title>
 </head>
 
-<body onload="validarSessao(), listar_publicacoes(), trazer_votos()">
+<body onload="validarSessao(), listar_publicacoes(), trazer_votos(), listar_usuarios()">
     <header class="header">
         <ul class="navegacao">
             <li><a href="index.html">Home</a></li>
@@ -106,13 +106,15 @@
         </div>
         <div class="card">
             <div class="titulo_card">
-                <h3>Populares</h3>
+                <h3>Lista de usuários</h3>
             </div>
             <div class="seguindo">
-                <div id="lista_usuarios" class="lista_card">
-                    <span>@TheusBr05</span>
-                    <span>@TheusBr05</span>
-                    <span>@TheusBr05</span>
+                <div class="lista_card">
+                    <span id="lista_usuarios">
+                        <span>@TheusBr05</span>
+                        <span>@TheusBr05</span>
+                        <span>@TheusBr05</span>
+                    </span>
                 </div>
 
             </div>
@@ -136,233 +138,77 @@
         img_avatar.src = `assets/${sessionStorage.FOTO_USUARIO}`;
     }
 
-    function listar_publicacoes() {
-
-
-
-
-        var seguidos = [];
-
+    function listar_usuarios() {
         fetch("/usuarios/listar").then(function (resposta) {
-            resposta.json().then(function (resposta) {
-                for (var i = 0; i < resposta.length; i++) {
-                    var id_usuario = resposta[i].id_usuario;
-                    fetch(`/usuarios/verificar_seguindo/${id_usuario}/${Number(sessionStorage.ID_USUARIO)}`, {
-                        cache: 'no-store'
-                    }).then(function (resposta) {
-                        if (resposta.ok) {
-                            if (resposta.status != 204) {
-                                resposta.json().then(function (resposta) {
-                                    seguidos.push(resposta[0].fk_seguido);
+            if (resposta.ok) {
+                resposta.json().then(function (resposta) {
+                    lista_usuarios.innerHTML = '';
+                    for (var i = 0; i < resposta.length; i++) {
+                        var nick = resposta[i].nick;
+                        lista_usuarios.innerHTML += `
+                            <span>@${nick}</span>
+                        `;
 
-                                })
-                            }
-                        }
-                    })
+
+                    }
+                })
+            }
+        })
+    }
+
+    function listar_publicacoes() {
+        fetch("/posts/listar_publicacoes").then(function (resposta) {
+            if (resposta.ok) {
+                if (resposta.status == 204) {
+                    feed.innerHTML = `
+                        <div class="postagem">
+                            <div class="barra_superior">
+                                <h3>Nenhum resultado encontrado</h3>
+                            </div>
+                        </div>
+                    `;
                 }
-            })
-        }).then(function (resposta){
-            fetch("/posts/listar_publicacoes").then(function (resposta) {
-                if (resposta.ok) {
-                    if (resposta.status == 204) {
-                        feed.innerHTML = `
-                            <div class="postagem">
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    feed.innerHTML = "";
+                    for (var i = resposta.length - 1; i >= 0; i--) {
+                        var nick = resposta[i].nick;
+                        var titulo = resposta[i].titulo;
+                        var conteudo = resposta[i].conteudo;
+                        var imagem = resposta[i].imagem;
+                        var avatar = resposta[i].foto_perfil
+
+                        feed.innerHTML += `
+                            <div id="postagem${i}" class="postagem">
                                 <div class="barra_superior">
-                                    <h3>Nenhum resultado encontrado</h3>
+                                    <div class="info_usuario">
+                                        <div class="icone_usuario">
+                                            <img id="img_avatar" src="assets/${avatar}" alt="">
+                                        </div>
+                                        <p class="nick">${nick}</p>
+                                    </div>
+                                    <span></span>
+                                </div>
+                                <div class="conteudo_postagem">
+                                    <div class="titulo_postagem">
+                                        <h3 id="h3_titulo">${titulo}</h3>
+                                    </div>
+                                    <div class="texto_postagem">
+                                        <p id="p_conteudo">${conteudo}</p>
+                                    </div>
+                                    <div class="imagem_postagem">
+                                        <img id="" src="assets/${imagem}" alt="">
+                                        
+                                    </div>
                                 </div>
                             </div>
                         `;
-                    } else {
-                        resposta.json().then(function (resposta) {
-                            console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-                            feed.innerHTML = "";
-                            for (var i = resposta.length - 1; i >= 0; i--) {
-                                var nick = resposta[i].nick;
-                                var titulo = resposta[i].titulo;
-                                var conteudo = resposta[i].conteudo;
-                                var imagem = resposta[i].imagem;
-                                var avatar = resposta[i].foto_perfil;
-                                var id_publicador = Number(resposta[i].id_usuario)
-                                var esta_seguindo = seguidos.includes(id_publicador);
-
-                                if (esta_seguindo) {
-                                    feed.innerHTML += `
-                                        <div id="postagem${i}" class="postagem">
-                                            <div class="barra_superior">
-                                                <div class="info_usuario">
-                                                    <div class="icone_usuario">
-                                                        <img id="img_avatar" src="assets/${avatar}" alt="">
-                                                    </div>
-                                                    <p class="nick">${nick}</p>
-                                                </div>
-                                                <button class="btn_seguir">
-                                                    Seguindo
-                                                </button>
-                                            </div>
-                                            <div class="conteudo_postagem">
-                                                <div class="titulo_postagem">
-                                                    <h3 id="h3_titulo">${titulo}</h3>
-                                                </div>
-                                                <div class="texto_postagem">
-                                                    <p id="p_conteudo">${conteudo}</p>
-                                                </div>
-                                                <div class="imagem_postagem">
-                                                    <img id="" src="assets/${imagem}" alt="">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `;
-                                } else {
-                                    feed.innerHTML += `
-                                        <div id="postagem${i}" class="postagem">
-                                            <div class="barra_superior">
-                                                <div class="info_usuario">
-                                                    <div class="icone_usuario">
-                                                        <img id="img_avatar" src="assets/${avatar}" alt="">
-                                                    </div>
-                                                    <p class="nick">${nick}</p>
-                                                </div>
-                                                <button onclick="seguir(${id_publicador})" class="btn_seguir">
-                                                    Seguir
-                                                </button>
-                                            </div>
-                                            <div class="conteudo_postagem">
-                                                <div class="titulo_postagem">
-                                                    <h3 id="h3_titulo">${titulo}</h3>
-                                                </div>
-                                                <div class="texto_postagem">
-                                                    <p id="p_conteudo">${conteudo}</p>
-                                                </div>
-                                                <div class="imagem_postagem">
-                                                    <img id="" src="assets/${imagem}" alt="">
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `;
-                                }
-
-                            }
-                        })
                     }
-                }
-            })
+                })
+            }
         })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // fetch("/posts/listar_publicacoes").then(function (resposta) {
-        //     if (resposta.ok) {
-        //         if (resposta.status == 204) {
-        //             feed.innerHTML = `
-        //                 <div class="postagem">
-        //                     <div class="barra_superior">
-        //                         <h3>Nenhum resultado encontrado</h3>
-        //                     </div>
-        //                 </div>
-        //             `;
-        //         }
-
-        //         resposta.json().then(function (resposta) {
-        //             console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-        //             feed.innerHTML = "";
-        //             for (var i = resposta.length - 1; i >= 0; i--) {
-        //                 var nick = resposta[i].nick;
-        //                 var titulo = resposta[i].titulo;
-        //                 var conteudo = resposta[i].conteudo;
-        //                 var imagem = resposta[i].imagem;
-        //                 var avatar = resposta[i].foto_perfil;
-        //                 var id_publicador = resposta[i].id_usuario;
-
-        //                 fetch(`/usuarios/verificar_seguindo/${id_publicador}/${Number(sessionStorage.ID_USUARIO)}`, { cache: 'no-store' })
-        //                     .then(function (resposta) {
-        //                         if (resposta.ok) {
-        //                             if (resposta.status == 204) {
-        //                                 feed.innerHTML += `
-        //                                     <div id="postagem${i}" class="postagem">
-        //                                         <div class="barra_superior">
-        //                                             <div class="info_usuario">
-        //                                                 <div class="icone_usuario">
-        //                                                     <img id="img_avatar" src="assets/${avatar}" alt="">
-        //                                                 </div>
-        //                                                 <p class="nick">${nick}</p>
-        //                                             </div>
-        //                                             <button onclick="seguir(${id_publicador})" class="btn_seguir">
-        //                                                 Seguir
-        //                                             </button>
-        //                                         </div>
-        //                                         <div class="conteudo_postagem">
-        //                                             <div class="titulo_postagem">
-        //                                                 <h3 id="h3_titulo">${titulo}</h3>
-        //                                             </div>
-        //                                             <div class="texto_postagem">
-        //                                                 <p id="p_conteudo">${conteudo}</p>
-        //                                             </div>
-        //                                             <div class="imagem_postagem">
-        //                                                 <img id="" src="assets/${imagem}" alt="">
-                                                        
-        //                                             </div>
-        //                                         </div>
-        //                                     </div>
-        //                                 `;
-        //                             } else {
-        //                                 feed.innerHTML += `
-        //                                     <div id="postagem${i}" class="postagem">
-        //                                         <div class="barra_superior">
-        //                                             <div class="info_usuario">
-        //                                                 <div class="icone_usuario">
-        //                                                     <img id="img_avatar" src="assets/${avatar}" alt="">
-        //                                                 </div>
-        //                                                 <p class="nick">${nick}</p>
-        //                                             </div>
-        //                                             <button class="btn_seguir">
-        //                                                 Seguindo
-        //                                             </button>
-        //                                         </div>
-        //                                         <div class="conteudo_postagem">
-        //                                             <div class="titulo_postagem">
-        //                                                 <h3 id="h3_titulo">${titulo}</h3>
-        //                                             </div>
-        //                                             <div class="texto_postagem">
-        //                                                 <p id="p_conteudo">${conteudo}</p>
-        //                                             </div>
-        //                                             <div class="imagem_postagem">
-        //                                                 <img id="" src="assets/${imagem}" alt="">
-                                                        
-        //                                             </div>
-        //                                         </div>
-        //                                     </div>
-        //                                 `;
-        //                             }
-        //                         }
-        //                     })
-
-
-        //             }
-        //         })
-        //     }
-        // })
     }
 
     var linhas = [];
@@ -449,17 +295,7 @@
 
         fetch("/usuarios/mostrar_seguidores").then(function (resposta) {
             if (resposta.ok) {
-                resposta.json().then(function (resposta) {
-                    lista_usuarios.innerHTML = '';
-                    for (var i = 0; i < resposta.length; i++) {
-                        var nick = resposta[i].nick;
-                        var seguidores = resposta[i].seguidores;
 
-                        lista_usuarios.innerHTML += `
-                            <span><span>@${nick}</span> <span>: ${seguidores}</span></span>
-                        `;
-                    }
-                })
             }
         })
 
