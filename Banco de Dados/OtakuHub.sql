@@ -12,13 +12,13 @@ CREATE TABLE usuario (
     senha VARCHAR(45)
 );
 
-CREATE TABLE seguidores(
-    fk_seguido INT,
-    fk_seguidor INT,
-    CONSTRAINT fk_usuario_seguido FOREIGN KEY (fk_seguido) REFERENCES usuario(id_usuario),
-    CONSTRAINT fk_usuario_seguidor FOREIGN KEY (fk_seguidor) REFERENCES usuario(id_usuario),
-    CONSTRAINT pk_seguidores PRIMARY KEY (fk_seguido, fk_seguidor)
-);
+-- CREATE TABLE seguidores(
+--     fk_seguido INT,
+--     fk_seguidor INT,
+--     CONSTRAINT fk_usuario_seguido FOREIGN KEY (fk_seguido) REFERENCES usuario(id_usuario),
+--     CONSTRAINT fk_usuario_seguidor FOREIGN KEY (fk_seguidor) REFERENCES usuario(id_usuario),
+--     CONSTRAINT pk_seguidores PRIMARY KEY (fk_seguido, fk_seguidor)
+-- );
 
 
 CREATE TABLE anime_manga(
@@ -26,7 +26,8 @@ CREATE TABLE anime_manga(
     nome VARCHAR(45),
     sinopse VARCHAR(5000),
     autor VARCHAR(45),
-    genero VARCHAR(45)
+    genero VARCHAR(45),
+    foto_capa VARCHAR(300)
 );
 
 CREATE TABLE votacao (
@@ -48,59 +49,59 @@ CREATE TABLE publicacao (
     CONSTRAINT pk_publicacao PRIMARY KEY (id_publicacao, fk_usuario)
 );
 
-CREATE TABLE comentario (
-    id_comentario INT AUTO_INCREMENT,
-    texto VARCHAR(250),
-    dt_comentario DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fk_publicacao INT,
-    fk_usuario INT,
-    CONSTRAINT fk_comentario_publicacao FOREIGN KEY (fk_publicacao) REFERENCES publicacao (id_publicacao),
-    CONSTRAINT fk_comentario_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT pk_comentario PRIMARY KEY (id_comentario, fk_publicacao, fk_usuario)
-);
+-- CREATE TABLE comentario (
+--     id_comentario INT AUTO_INCREMENT,
+--     texto VARCHAR(250),
+--     dt_comentario DATETIME DEFAULT CURRENT_TIMESTAMP,
+--     fk_publicacao INT,
+--     fk_usuario INT,
+--     CONSTRAINT fk_comentario_publicacao FOREIGN KEY (fk_publicacao) REFERENCES publicacao (id_publicacao),
+--     CONSTRAINT fk_comentario_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario (id_usuario),
+--     CONSTRAINT pk_comentario PRIMARY KEY (id_comentario, fk_publicacao, fk_usuario)
+-- );
 
-CREATE TABLE curtida (
-    dt_curtida DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fk_publicacao INT,
-    fk_usuario INT,
-    CONSTRAINT fk_curtida_publicacao FOREIGN KEY (fk_publicacao) REFERENCES publicacao (id_publicacao),
-    CONSTRAINT fk_curtida_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario (id_usuario),
-    CONSTRAINT pk_comentario PRIMARY KEY (fk_publicacao, fk_usuario)
-);
+-- CREATE TABLE curtida (
+--     dt_curtida DATETIME DEFAULT CURRENT_TIMESTAMP,
+--     fk_publicacao INT,
+--     fk_usuario INT,
+--     CONSTRAINT fk_curtida_publicacao FOREIGN KEY (fk_publicacao) REFERENCES publicacao (id_publicacao),
+--     CONSTRAINT fk_curtida_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario (id_usuario),
+--     CONSTRAINT pk_comentario PRIMARY KEY (fk_publicacao, fk_usuario)
+-- );
 
-DELIMITER $$
-CREATE FUNCTION fun_votar
-(id_usuario INT, id_anime_manga INT)
-RETURNS INT(1) DETERMINISTIC
-BEGIN
-DECLARE voto_existente INT(1) DEFAULT 0;
-SET voto_existente = IFNULL(
-        (
-            SELECT DISTINCT 1
-            FROM votacao
-            WHERE fk_usuario = id_usuario
-                AND fk_anime_manga = id_anime_manga
-        ),
-        0
-);
-RETURN voto_existente;
-END 
-$$;
+-- DELIMITER $$
+-- CREATE FUNCTION fun_votar
+-- (id_usuario INT, id_anime_manga INT)
+-- RETURNS INT(1) DETERMINISTIC
+-- BEGIN
+-- DECLARE voto_existente INT(1) DEFAULT 0;
+-- SET voto_existente = IFNULL(
+--         (
+--             SELECT DISTINCT 1
+--             FROM votacao
+--             WHERE fk_usuario = id_usuario
+--                 AND fk_anime_manga = id_anime_manga
+--         ),
+--         0
+-- );
+-- RETURN voto_existente;
+-- END 
+-- $$;
 
-DELIMITER $$
-CREATE PROCEDURE sp_votar(id_usuario INT, id_anime_manga INT)
-BEGIN
-DECLARE voto INT(1) DEFAULT 0;
-SET voto = fun_votar(id_usuario, id_anime_manga);
-	if voto = 0 then
-		insert into votacao values
-			(id_usuario, id_anime_manga);
-	end if;
+-- DELIMITER $$
+-- CREATE PROCEDURE sp_votar(id_usuario INT, id_anime_manga INT)
+-- BEGIN
+-- DECLARE voto INT(1) DEFAULT 0;
+-- SET voto = fun_votar(id_usuario, id_anime_manga);
+-- 	if voto = 0 then
+-- 		insert into votacao values
+-- 			(id_usuario, id_anime_manga);
+-- 	end if;
 		
-END
-$$
+-- END
+-- $$
 
-call sp_votar(2, 1);
+-- call sp_votar(2, 1);
 
 SELECT id_usuario, count(id_publicacao) FROM publicacao
             JOIN usuario ON id_usuario = fk_usuario
@@ -134,3 +135,7 @@ FROM votacao
     JOIN anime_manga ON id_anime_manga = fk_anime_manga
 GROUP BY fk_anime_manga
 ORDER BY votos DESC;
+
+SELECT * FROM usuario;
+
+UPDATE usuario SET nivel = 'adm' WHERE id_usuario = 6;

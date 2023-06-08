@@ -92,7 +92,7 @@
                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
                     animes_mangas.innerHTML = "";
-                    for (var i = resposta.length - 1; i >= 0; i--) {
+                    for (var i = 0; i < resposta.length; i++) {
                         var nome = resposta[i].nome;
                         var foto = resposta[i].foto_capa;
                         var id_anime = resposta[i].id_anime_manga;
